@@ -83,6 +83,9 @@ class Loader
      */
     protected function contentIsPlain(): bool
     {
+        // D3 disabled, because isPlain method doesn't exist in OXID eShop
+        return false;
+        
         /** @var BaseModel|Content $oEditObject */
         $oEditObject = $this->getShopConfig()->getActiveView()->getViewDataElement("edit");
         return $oEditObject instanceof Content && $oEditObject->isPlain();

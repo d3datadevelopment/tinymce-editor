@@ -1,6 +1,6 @@
 {
-  "name": "o3-shop/tinymce-editor",
-  "description": "TinyMCE 6 Integration for O3-Shop",
+  "name": "d3/tinymce-editor",
+  "description": "TinyMCE 6 Integration for OXID-Shop",
   "type": "oxideshop-module",
   "homepage": "https://www.o3-shop.com/",
   "license": [
@@ -14,6 +14,10 @@
     {
       "name": "O3-Shop",
       "email": "info@o3-shop.com"
+    },
+    {
+      "name": "D3 Data Development (Inh. Thomas Dartsch)",
+      "email": "info@d3data.de"
     }
   ],
   "extra": {
@@ -33,7 +37,8 @@
   },
   "require": {
     "php": ">=7.4",
-    "o3-shop/shop-ce": "^1.2 || dev-dev_b-1.2"
+    "oxid-esales/oxideshop-ce": "^6.3.0",
+    "d3/oxidservicebridges": "^1.2"
   },
   "autoload": {
     "psr-4": {
