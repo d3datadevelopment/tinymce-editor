@@ -90,6 +90,12 @@ function verifyPath(string $path): void
 function fixPath(string $path): string
 {
     $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/../../../../../../' . $path;
+
+    $re = '/\/[^\/.]*\/\.\.\//mU';
+    while(preg_match($re, $path)) {
+        $path = preg_replace($re, "/", $path);
+    }
+
     $path = str_replace('\\', '/', $path);
     $path = RoxyFile::FixPath($path);
     return $path;
@@ -166,7 +172,7 @@ class RoxyFile
     }
 
     /**
-     * @param $path
+     * @param string $path
      * @return bool
      */
     public static function CreatePath(string $path): bool
@@ -174,8 +180,9 @@ class RoxyFile
         if (is_dir($path)) {
             return true;
         }
+
         $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1);
-        $return = self::createPath($prev_path);
+        $return = self::CreatePath( $prev_path);
         return $return && is_writable($prev_path) && mkdir($path);
     }
 
