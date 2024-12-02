@@ -25,9 +25,15 @@ $ vendor/bin/oe-console oe:module:activate o3-tinymce-editor
 
 Activate the module.
 
-## Issues
+## Contributing
 
-To report issues with the module, please use the [O3-Shop bugtracking system](https://issues.o3-shop.com/) - module TinyMCE Editor project.
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue. Don't forget to give the project a star! Thanks again!
+
+- Fork the Project
+- Create your Feature Branch (git checkout -b feature/AmazingFeature)
+- Commit your Changes (git commit -m 'Add some AmazingFeature')
+- Push to the Branch (git push origin feature/AmazingFeature)
+- Open a Pull Request
 
 ## License
 
