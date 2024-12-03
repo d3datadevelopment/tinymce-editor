@@ -36,7 +36,6 @@ use O3\TinyMCE\Application\Core\TinyMCE\Options\InitInstanceCallback;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Language;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\LicenseKey;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\MaxHeight;
-use O3\TinyMCE\Application\Core\TinyMCE\Options\MaxWidth;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Menubar;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\MinHeight;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\OptionInterface;

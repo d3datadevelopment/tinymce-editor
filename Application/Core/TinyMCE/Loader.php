@@ -23,11 +23,9 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE;
 
-use OxidEsales\Eshop\Application\Model\Content;
 use OxidEsales\Eshop\Core\Config;
 use OxidEsales\Eshop\Core\Exception\FileException;
 use OxidEsales\Eshop\Core\Language;
-use OxidEsales\Eshop\Core\Model\BaseModel;
 use OxidEsales\Eshop\Core\Registry;
 
 class Loader
@@ -86,9 +84,9 @@ class Loader
         // D3 disabled, because isPlain method doesn't exist in OXID eShop
         return false;
         
-        /** @var BaseModel|Content $oEditObject */
-        $oEditObject = $this->getShopConfig()->getActiveView()->getViewDataElement("edit");
-        return $oEditObject instanceof Content && $oEditObject->isPlain();
+        //        /** @var BaseModel|Content $oEditObject */
+        //        $oEditObject = $this->getShopConfig()->getActiveView()->getViewDataElement("edit");
+        //        return $oEditObject instanceof Content && $oEditObject->isPlain();
     }
 
     /**

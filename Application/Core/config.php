@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 function checkAccess(string $action): void
 {
+    unset($action);
     if ($_COOKIE['filemanagerkey'] !== md5($_SERVER['DOCUMENT_ROOT'].$_COOKIE['admin_sid'])) {
         die('Access Denied!!');
     }

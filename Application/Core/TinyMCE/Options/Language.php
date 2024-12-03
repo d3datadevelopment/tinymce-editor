@@ -23,6 +23,8 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use OxidEsales\EshopCommunity\Core\Exception\LanguageNotFoundException;
+
 class Language extends AbstractOption
 {
     protected string $key = 'language';
@@ -36,17 +38,22 @@ class Language extends AbstractOption
 
         $oLang = $this->loader->getLanguage();
 
-        $aLang = [
-            "cs" => "cs",
-            "da" => "da",
-            "de" => "de",
-            "es" => "es_419",
-            "fr" => "fr_FR",
-            "it" => "it_IT",
-            "nl" => "nl",
-            "ru" => "ru",
-        ];
-        return $aLang[ $oLang->getLanguageAbbr((int) $oLang->getTplLanguage()) ] ?? "en";
+        try {
+            $aLang = [
+                "cs" => "cs",
+                "da" => "da",
+                "de" => "de",
+                "es" => "es_419",
+                "fr" => "fr_FR",
+                "it" => "it_IT",
+                "nl" => "nl",
+                "ru" => "ru",
+            ];
+
+            return $aLang[ $oLang->getLanguageAbbr( (int) $oLang->getTplLanguage() ) ] ?? "en";
+        } catch (LanguageNotFoundException) {
+            return "en";
+        }
     }
 
     public function isQuoted(): bool
