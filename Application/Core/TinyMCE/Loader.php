@@ -28,6 +28,11 @@ use OxidEsales\Eshop\Core\Config;
 use OxidEsales\Eshop\Core\Exception\FileException;
 use OxidEsales\Eshop\Core\Language;
 use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRenderer;
+use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRendererBridgeInterface;
 
 class Loader
 {
@@ -62,8 +67,8 @@ class Loader
         $this->registerScripts($configuration);
         $this->registerIncludes();
 
-        $smarty = Registry::getUtilsView()->getSmarty();
-        return $smarty->fetch('@' . Constants::OXID_MODULE_ID.'/admin/EditorSwitch.tpl');
+        $engine = $this->getTemplateRenderer()->getTemplateEngine();
+        return $engine->render('@' . Constants::OXID_MODULE_ID.'/admin/editorswitch');
     }
 
     /**
@@ -71,8 +76,10 @@ class Loader
      */
     protected function isEnabledForCurrentController(): bool
     {
+        /** @var ModuleSettingService $service */
+        $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
         /** @var string[] $aEnabledClasses */
-        $aEnabledClasses = $this->getShopConfig()->getConfigParam("aTinyMCE_classes", []);
+        $aEnabledClasses = $service->getCollection("aTinyMCE_classes", Constants::OXID_MODULE_ID);
 
         return in_array($this->getShopConfig()->getActiveView()->getClassKey(), $aEnabledClasses);
     }
@@ -113,22 +120,25 @@ class Loader
      */
     protected function registerScripts(Configuration $configuration): void
     {
-        $sCopyLongDescFromTinyMCE = file_get_contents(__DIR__.'/../../../out/scripts/copyLongDesc.js');
-        $sUrlConverter = file_get_contents(__DIR__.'/../../../out/scripts/urlConverter.js');
+        $sCopyLongDescFromTinyMCE = file_get_contents(__DIR__.'/../../../assets/out/scripts/copyLongDesc.js');
+        $sUrlConverter = file_get_contents(__DIR__.'/../../../assets/out/scripts/urlConverter.js');
         $sInit = str_replace(
             "'CONFIG':'VALUES'",
             $configuration->getConfig(),
-            (string) file_get_contents(__DIR__.'/../../../out/scripts/init.js')
+            (string) file_get_contents(__DIR__.'/../../../assets/out/scripts/init.js')
         );
-        $smarty = Registry::getUtilsView()->getSmarty();
-        $sSufix = ($smarty->_tpl_vars["__oxid_include_dynamic"]) ? '_dynamic' : '';
 
-        $aScript = (array) Registry::getConfig()->getGlobalParameter('scripts' . $sSufix);
+        $engine = $this->getTemplateRenderer()->getTemplateEngine();
+        $globals = $engine->getGlobals();
+        $sSuffix = ($globals['__oxid_include_dynamic']) ? '_dynamic' : '';
+
+        $aScript = (array) Registry::getConfig()->getGlobalParameter('scripts' . $sSuffix);
+
         $aScript[] = $sCopyLongDescFromTinyMCE;
         $aScript[] = $sUrlConverter;
         $aScript[] = $sInit;
 
-        Registry::getConfig()->setGlobalParameter('scripts' . $sSufix, $aScript);
+        Registry::getConfig()->setGlobalParameter('scripts' . $sSuffix, $aScript);
     }
 
     /**
@@ -137,17 +147,26 @@ class Loader
      */
     protected function registerIncludes(): void
     {
-        $smarty = Registry::getUtilsView()->getSmarty();
-        $sSuffix = ($smarty->_tpl_vars["__oxid_include_dynamic"]) ? '_dynamic' : '';
+        $engine = $this->getTemplateRenderer()->getTemplateEngine();
+        $globals = $engine->getGlobals();
+        $sSuffix = ($globals['__oxid_include_dynamic']) ? '_dynamic' : '';
 
         /** @var array<int, string[]> $aInclude */
         $aInclude = (array) Registry::getConfig()->getGlobalParameter('includes' . $sSuffix);
 
         $aInclude[3][] = Registry::getConfig()->getActiveView()->getViewConfig()->getModuleUrl(
-            'o3-tinymce-editor',
-            'out/tinymce/tinymce.min.js'
+            Constants::OXID_MODULE_ID,
+            'assets/out/tinymce/tinymce.min.js'
         );
 
+
         Registry::getConfig()->setGlobalParameter('includes' . $sSuffix, $aInclude);
+    }
+
+    protected function getTemplateRenderer(): TemplateRenderer
+    {
+        return ContainerFactory::getInstance()->getContainer()
+                        ->get(TemplateRendererBridgeInterface::class)
+                        ->getTemplateRenderer();
     }
 }

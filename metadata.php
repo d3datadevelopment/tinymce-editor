@@ -40,8 +40,8 @@ $aModule          = [
         'tinyfilemanager'   => O3\TinyMCE\Application\Controller\Admin\TinyFileManager::class,
     ],
     'templates' => [
-        '@' . Constants::OXID_MODULE_ID.'/admin/TinyFilemanager.tpl'   => 'views/smarty/admin/tpl/filemanager.tpl',
-        '@' . Constants::OXID_MODULE_ID.'/admin/EditorSwitch.tpl'      => 'views/smarty/admin/tpl/editorswitch.tpl',
+        '@' . Constants::OXID_MODULE_ID.'/admin/tinyfilemanager.tpl'   => 'views/smarty/admin/filemanager.tpl',
+        '@' . Constants::OXID_MODULE_ID.'/admin/editorswitch.tpl'      => 'views/smarty/admin/editorswitch.tpl',
     ],
     'blocks' => [
         [
