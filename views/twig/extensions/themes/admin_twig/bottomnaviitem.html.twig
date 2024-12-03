@@ -1,0 +1,11 @@
+{% extends "bottomnaviitem.html.twig" %}
+
+{% block admin_bottomnaviitem %}
+
+    {{ parent() }}
+
+    {% if method_exists(oViewConf,'loadTinyMce') %}
+        [{ $oViewConf->loadTinyMce() }]
+    {% endif %}
+
+{% endblock %}
