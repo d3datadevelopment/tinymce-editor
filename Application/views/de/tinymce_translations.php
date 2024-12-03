@@ -19,8 +19,10 @@
  * @license    https://www.gnu.org/licenses/gpl-3.0  GNU General Public License 3 (GPLv3)
  */
 
-$sLangName = 'Deutsch';
-$aLang = [
+// @codeCoverageIgnoreStart
+declare(strict_types=1);
+
+return [
    'charset'                                => 'UTF-8',
    'TINYMCE_TOGGLE'                         => 'Editor zeigen/verstecken',
    'TINYMCE_PLAINCMS'                       => '<b class="errorbox">Der Editor wurde für diese Seite deaktiviert, weil sie keine HTML Formatierung enthalten darf </b>',
@@ -31,3 +33,4 @@ $aLang = [
    'HELP_SHOP_MODULE_aTinyMCE_classes'      => 'für die Benutzung von TinyMCE in eigenen Admin Views muss hier die entsprechende Controllerklasse eingetragen werden, dann wird für jedes Textarea je ein Editor erzeugt',
    'SHOP_MODULE_GROUP_tinyMceSettings'      => 'TinyMCE Einstellungen &amp; Plugins',
 ];
+// @codeCoverageIgnoreStart

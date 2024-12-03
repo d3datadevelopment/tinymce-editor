@@ -21,12 +21,9 @@
 
 declare(strict_types=1);
 
-namespace O3\TinyMCE\Application\Controller\Admin;
+namespace O3\TinyMCE\Application\Model;
 
-use O3\TinyMCE\Application\Model\Constants;
-use OxidEsales\Eshop\Application\Controller\Admin\AdminController;
-
-class TinyFileManager extends AdminController
+class Constants
 {
-    protected $_sThisTemplate = '@' . Constants::OXID_MODULE_ID.'/admin/TinyFilemanager.tpl';
+    public const OXID_MODULE_ID = 'o3-tinymce-editor';
 }

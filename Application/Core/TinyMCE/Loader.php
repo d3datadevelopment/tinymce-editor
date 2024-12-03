@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE;
 
+use O3\TinyMCE\Application\Model\Constants;
 use OxidEsales\Eshop\Core\Config;
 use OxidEsales\Eshop\Core\Exception\FileException;
 use OxidEsales\Eshop\Core\Language;
@@ -62,7 +63,7 @@ class Loader
         $this->registerIncludes();
 
         $smarty = Registry::getUtilsView()->getSmarty();
-        return $smarty->fetch('EditorSwitch.tpl');
+        return $smarty->fetch('@' . Constants::OXID_MODULE_ID.'/admin/EditorSwitch.tpl');
     }
 
     /**

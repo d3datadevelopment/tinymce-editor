@@ -19,8 +19,10 @@
  * @license    https://www.gnu.org/licenses/gpl-3.0  GNU General Public License 3 (GPLv3)
  */
 
-$sLangName = 'English';
-$aLang = [
+// @codeCoverageIgnoreStart
+declare(strict_types=1);
+
+return [
    'charset'                                => 'UTF-8',
    'TINYMCE_TOGGLE'                         => 'toggle editor',
    'TINYMCE_PLAINCMS'                       => '<b class="errorbox">The editor was disabled for this page because it may not contain HTML code</b>',
@@ -31,3 +33,4 @@ $aLang = [
    'HELP_SHOP_MODULE_aTinyMCE_classes'      => 'if you want to use TinyMCE for your custom controllers, you need to enter their class names here.',
    'SHOP_MODULE_GROUP_tinyMceSettings'      => 'TinyMCE Settings &amp; Plugins',
 ];
+// @codeCoverageIgnoreEnd

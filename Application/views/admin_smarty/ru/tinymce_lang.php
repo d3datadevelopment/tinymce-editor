@@ -21,12 +21,12 @@
 
 declare(strict_types=1);
 
-namespace O3\TinyMCE\Application\Controller\Admin;
+$sLangName = 'English';
 
-use O3\TinyMCE\Application\Model\Constants;
-use OxidEsales\Eshop\Application\Controller\Admin\AdminController;
+// -------------------------------
+// RESOURCE IDENTITFIER = STRING
+// -------------------------------
 
-class TinyFileManager extends AdminController
-{
-    protected $_sThisTemplate = '@' . Constants::OXID_MODULE_ID.'/admin/TinyFilemanager.tpl';
-}
+$aLang = include __DIR__."/../../en/tinymce_translations.php";
+
+// @codeCoverageIgnoreEnd

@@ -22,14 +22,15 @@
 declare(strict_types=1);
 
 use O3\TinyMCE\Application\Core\Setup\Events;
+use O3\TinyMCE\Application\Model\Constants;
 
 $sMetadataVersion = '2.1';
 $aModule          = [
-    'id' => 'o3-tinymce-editor',
+    'id' => Constants::OXID_MODULE_ID,
     'title' => 'TinyMCE Editor',
     'description' => 'TinyMCE 6 integration for O3-Shop, ported to OXID eShop',
     'thumbnail' => 'logo.png',
-    'version' => '1.1.0',
+    'version' => '2.0.0',
     'author' => 'D3 Data Development, O3-Shop, Marat Bedoev',
     'url' => 'https://www.o3-shop.com/',
     'extend' => [
@@ -39,14 +40,14 @@ $aModule          = [
         'tinyfilemanager'   => O3\TinyMCE\Application\Controller\Admin\TinyFileManager::class,
     ],
     'templates' => [
-        'TinyFilemanager.tpl'   => 'o3-shop/tinymce-editor/Application/views/admin/filemanager.tpl',
-        'EditorSwitch.tpl'      => 'o3-shop/tinymce-editor/Application/views/admin/editorswitch.tpl',
+        '@' . Constants::OXID_MODULE_ID.'/admin/TinyFilemanager.tpl'   => 'views/smarty/admin/tpl/filemanager.tpl',
+        '@' . Constants::OXID_MODULE_ID.'/admin/EditorSwitch.tpl'      => 'views/smarty/admin/tpl/editorswitch.tpl',
     ],
     'blocks' => [
         [
-            'template' => 'bottomnaviitem.tpl',
-            'block' => 'admin_bottomnaviitem',
-            'file' => 'Application/views/blocks/admin/bottomnaviitem_admin_bottomnaviitem.tpl',
+            'template'  => 'bottomnaviitem.tpl',
+            'block'     => 'admin_bottomnaviitem',
+            'file'      => 'views/smarty/blocks/admin/bottomnaviitem_admin_bottomnaviitem.tpl',
         ],
     ],
     'settings' => [
