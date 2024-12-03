@@ -137,8 +137,7 @@ class Configuration
         $this->addOption(oxNew(Promotion::class, $this->loader));
         $this->addOption(oxNew(ContextMenu::class, $this->loader));
         $this->addOption(oxNew(MinHeight::class, $this->loader));
-        //$this->addOption(oxNew(MaxHeight::class, $this->loader));
-        //$this->addOption(oxNew(MaxWidth::class, $this->loader));
+        $this->addOption(oxNew(MaxHeight::class, $this->loader));
         $this->addOption(oxNew(Menubar::class, $this->loader));
         $this->addOption(oxNew(ToolbarSticky::class, $this->loader));
         $this->addOption(oxNew(ToolbarMode::class, $this->loader));

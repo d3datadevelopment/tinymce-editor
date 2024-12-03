@@ -29,7 +29,7 @@ class MaxHeight extends AbstractOption
 
     public function get(): string
     {
-        return '90%';
+        return '500';
     }
 
     public function isQuoted(): bool

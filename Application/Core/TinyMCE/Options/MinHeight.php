@@ -34,9 +34,12 @@ class MinHeight extends AbstractOption
         $profile = (array) Registry::getSession()->getVariable('profile');
 
         if (array_key_exists(1, $profile)) {
-            return (string) (max($profile[1] * 20, 350));
+            return (string) max(
+                $profile[1] * 20,
+                350
+            );
         }
 
-        return '350';
+        return "350";
     }
 }
