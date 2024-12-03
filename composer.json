@@ -1,6 +1,6 @@
 {
   "name": "d3/tinymce-editor",
-  "description": "TinyMCE 6 Integration for OXID-Shop",
+  "description": "TinyMCE Integration for OXID-Shop",
   "type": "oxideshop-module",
   "homepage": "https://www.o3-shop.com/",
   "license": [
@@ -20,29 +20,17 @@
       "email": "info@d3data.de"
     }
   ],
-  "extra": {
-    "oxideshop": {
-      "blacklist-filter": [
-        "composer.json",
-        "CHANGELOG.md",
-        "README.md",
-        ".php-cs-fixer.php",
-        "phpstan.neon"
-      ],
-      "target-directory": "o3-shop/tinymce-editor"
-    }
-  },
   "archive": {
     "exclude": ["/build"]
   },
   "require": {
-    "php": ">=7.4",
-    "oxid-esales/oxideshop-ce": "^6.3.0",
-    "d3/oxidservicebridges": "^1.2"
+    "php": "^8.0",
+    "oxid-esales/oxideshop-ce": "7.0 - 7.2",
+    "d3/oxidservicebridges": "^2.1"
   },
   "autoload": {
     "psr-4": {
-      "O3\\TinyMCE\\": "../../../source/modules/o3-shop/tinymce-editor"
+      "O3\\TinyMCE\\": "./"
     }
   }
 }
