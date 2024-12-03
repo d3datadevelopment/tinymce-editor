@@ -5,7 +5,7 @@
     {{ parent() }}
 
     {% if method_exists(oViewConf,'loadTinyMce') %}
-        [{ $oViewConf->loadTinyMce() }]
+        {{ oViewConf.loadTinyMce() }}
     {% endif %}
 
 {% endblock %}
