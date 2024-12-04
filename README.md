@@ -12,8 +12,6 @@ $ composer require d3/tinymce-editor
 $ vendor/bin/oe-console oe:module:install source/modules/o3-shop/tinymce-editor
 ```
 
-Create the directory ´source/out/pictures/wysiwigpro´ in the shop root directory and assign the necessary rights to make this writable.
-
 After requiring the module, you need to activate it, either via OXID shop admin or CLI.
 
 Navigate to shop folder and execute the following: 
