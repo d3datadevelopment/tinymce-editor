@@ -1,11 +1,14 @@
 parameters:
   scanFiles:
     - .ide-helper.php
-    - ../../o3-shop/shop-ce/source/oxfunctions.php
+    - ../../oxid-esales/oxideshop-ce/source/bootstrap.php
+    - ../../oxid-esales/oxideshop-ce/source/oxfunctions.php
+    - ../../oxid-esales/oxideshop-ce/source/overridablefunctions.php
   paths:
     - Application
+    - assets/out/fileman
   level: 9
-  phpVersion: 70400
+  phpVersion: 80000
   ignoreErrors:
     - '#Constant FILES_ROOT not found.#'
     - '#Constant SESSION_PATH_KEY not found.#'
