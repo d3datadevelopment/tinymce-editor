@@ -121,7 +121,7 @@ class Loader
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getScripts(): array
     {
@@ -129,8 +129,8 @@ class Loader
             return [];
         }
 
-        $sCopyLongDescFromTinyMCE = file_get_contents(__DIR__.'/../../../assets/out/scripts/copyLongDesc.js');
-        $sUrlConverter = file_get_contents(__DIR__.'/../../../assets/out/scripts/urlConverter.js');
+        $sCopyLongDescFromTinyMCE = file_get_contents(__DIR__.'/../../../assets/out/scripts/copyLongDesc.js') ?: '';
+        $sUrlConverter = file_get_contents(__DIR__.'/../../../assets/out/scripts/urlConverter.js') ?: '';
         $sInit = str_replace(
             "'CONFIG':'VALUES'",
             $this->configuration->getConfig(),
@@ -145,7 +145,7 @@ class Loader
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getIncludes(): array
     {

@@ -459,38 +459,53 @@ class RoxyFile
 }
 class RoxyImage
 {
-    public static function GetImage(string $path)
+    public static function GetImage(string $path): GdImage
     {
         $ext = RoxyFile::GetExtension(basename($path));
         switch ($ext) {
             case 'png':
-                return imagecreatefrompng($path);
+                $img = imagecreatefrompng($path);
+                break;
             case 'gif':
-                return imagecreatefromgif($path);
+                $img = imagecreatefromgif($path);
+                break;
             default:
-                return imagecreatefromjpeg($path);
+                $img = imagecreatefromjpeg($path);
         }
+
+        if (!$img) {
+            throw new RuntimeException('Cannot open image');
+        }
+
+        return $img;
     }
 
-    public static function OutputImage($img, string $type, ?string $destination = '', int $quality = 90)
+    public static function OutputImage(
+        GdImage|string $img,
+        string $type,
+        ?string $destination = '',
+        int $quality = 90
+    ): void
     {
-        if (is_string($img)) {
-            $img = self::GetImage($img);
-        }
+        try {
+            if ( is_string( $img ) ) {
+                $img = self::GetImage( $img );
+            }
 
-        switch (strtolower($type)) {
-            case 'png':
-                imagepng($img, $destination);
-                break;
-            case 'gif':
-                imagegif($img, $destination);
-                break;
-            default:
-                imagejpeg($img, $destination, $quality);
-        }
+            switch ( strtolower( $type ) ) {
+                case 'png':
+                    imagepng( $img, $destination );
+                    break;
+                case 'gif':
+                    imagegif( $img, $destination );
+                    break;
+                default:
+                    imagejpeg( $img, $destination, $quality );
+            }
+        } catch ( RuntimeException $e ) {}
     }
 
-    public static function SetAlpha($img, string $path)
+    public static function SetAlpha(GdImage $img, string $path): GdImage
     {
         $ext = RoxyFile::GetExtension(basename($path));
         if ($ext == "gif" || $ext == "png") {
@@ -528,16 +543,27 @@ class RoxyImage
             $newWidth = intval($newHeight * $r);
         }
 
-        $thumbImg = imagecreatetruecolor((int) $newWidth, (int) $newHeight);
-        $img = self::GetImage($source);
+        try {
+            $thumbImg = imagecreatetruecolor( (int) $newWidth, (int) $newHeight );
+            $img      = self::GetImage( $source );
 
-        $thumbImg = self::SetAlpha($thumbImg, $source);
+            $thumbImg = self::SetAlpha( $thumbImg, $source );
 
-        imagecopyresampled($thumbImg, $img, 0, 0, 0, 0, (int) $newWidth, (int) $newHeight, $w, $h);
+            imagecopyresampled( $thumbImg, $img, 0, 0, 0, 0, (int) $newWidth, (int) $newHeight, $w, $h );
 
-        self::OutputImage($thumbImg, RoxyFile::GetExtension(basename($source)), $destination, $quality);
+            self::OutputImage( $thumbImg, RoxyFile::GetExtension( basename( $source ) ), $destination, $quality );
+        } catch ( RuntimeException $e ) {}
     }
 
+    /**
+     * @param string      $source
+     * @param string|null $destination
+     * @param int<1, max> $width
+     * @param int<1, max> $height
+     * @param int         $quality
+     *
+     * @return void
+     */
     public static function CropCenter(
         string $source,
         ?string $destination,
@@ -548,33 +574,51 @@ class RoxyImage
         $tmp = (array) getimagesize($source);
         $w = $tmp[0];
         $h = $tmp[1];
-        if (($w <= $width) && (!$height || ($h <= $height))) {
-            self::OutputImage(self::GetImage($source), RoxyFile::GetExtension(basename($source)), $destination, $quality);
-        }
-        $ratio = $width / $height;
-        $top = $left = 0;
 
-        $cropWidth = floor($h * $ratio);
-        $cropHeight = floor($cropWidth / $ratio);
-        if ($cropWidth > $w) {
-            $cropWidth = $w;
-            $cropHeight = $w / $ratio;
-        }
-        if ($cropHeight > $h) {
-            $cropHeight = $h;
-            $cropWidth = $h * $ratio;
-        }
+        try {
+            if ( ( $w <= $width ) &&
+                 ( $h <= $height)
+            ) {
+                self::OutputImage( self::GetImage( $source ), RoxyFile::GetExtension( basename( $source ) ), $destination, $quality );
+            }
+            $ratio = $width / $height;
+            $top   = $left = 0;
 
-        if ($cropWidth < $w) {
-            $left = floor(($w - $cropWidth) / 2);
-        }
-        if ($cropHeight < $h) {
-            $top = floor(($h - $cropHeight) / 2);
-        }
+            $cropWidth  = floor( $h * $ratio );
+            $cropHeight = floor( $cropWidth / $ratio );
+            if ( $cropWidth > $w ) {
+                $cropWidth  = $w;
+                $cropHeight = $w / $ratio;
+            }
+            if ( $cropHeight > $h ) {
+                $cropHeight = $h;
+                $cropWidth  = $h * $ratio;
+            }
 
-        self::Crop($source, $destination, (int) $left, (int) $top, $cropWidth, $cropHeight, $width, $height, $quality);
+            if ( $cropWidth < $w ) {
+                $left = floor( ( $w - $cropWidth ) / 2 );
+            }
+            if ( $cropHeight < $h ) {
+                $top = floor( ( $h - $cropHeight ) / 2 );
+            }
+
+            self::Crop( $source, $destination, (int) $left, (int) $top, $cropWidth, $cropHeight, $width, $height, $quality );
+        } catch (RuntimeException $e) {}
     }
 
+    /**
+     * @param string      $source
+     * @param string|null $destination
+     * @param int         $x
+     * @param int         $y
+     * @param int         $cropWidth
+     * @param int         $cropHeight
+     * @param int<1, max> $width
+     * @param int<1, max> $height
+     * @param int         $quality
+     *
+     * @return void
+     */
     public static function Crop(
         string $source,
         ?string $destination,

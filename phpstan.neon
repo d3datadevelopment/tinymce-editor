@@ -7,7 +7,7 @@ parameters:
   paths:
     - Application
     - assets/out/fileman
-  level: 9
+  level: 6
   phpVersion: 80000
   ignoreErrors:
     - '#Constant FILES_ROOT not found.#'
@@ -19,8 +19,3 @@ parameters:
     - '#Constant FILEPERMISSIONS not found.#'
     - '#Constant MAX_IMAGE_HEIGHT not found.#'
     - '#Constant MAX_IMAGE_WIDTH not found.#'
-    - '#Method RoxyImage\:\:OutputImage\(\) has no return type specified.#'
-    - '#Method RoxyImage\:\:OutputImage\(\) has parameter \$img with no type specified.#'
-    - '#Method RoxyImage\:\:SetAlpha\(\) has no return type specified.#'
-    - '#Method RoxyImage\:\:SetAlpha\(\) has parameter \$img with no type specified.#'
-    - '#Method RoxyImage\:\:GetImage\(\) has no return type specified.#'

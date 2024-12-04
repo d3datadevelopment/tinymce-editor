@@ -40,6 +40,9 @@ class ViewConfig extends ViewConfig_parent
         return $loader->getEditorCode();
     }
 
+    /**
+     * @return string[]
+     */
     public function getTinyMceScripts(): array
     {
         $config = Registry::getConfig();
@@ -49,6 +52,9 @@ class ViewConfig extends ViewConfig_parent
         return $loader->getScripts();
     }
 
+    /**
+     * @return string[]
+     */
     public function getTinyMceIncludes(): array
     {
         $config = Registry::getConfig();
