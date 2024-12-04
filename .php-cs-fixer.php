@@ -18,12 +18,13 @@
  * @license    https://www.gnu.org/licenses/gpl-3.0  GNU General Public License 3 (GPLv3)
  */
 
-$finder = PhpCsFixer\Finder::create()->in(__DIR__);
+$finder = PhpCsFixer\Finder::create()
+                           ->in(__DIR__);
 
 $config = new PhpCsFixer\Config();
 return $config
     ->setRules([
-        '@PHP74Migration' => true,
+        '@PHP80Migration' => true,
         '@PSR12' => true
     ])
     ->setFinder($finder);
