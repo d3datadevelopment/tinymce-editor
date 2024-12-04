@@ -51,6 +51,7 @@ use O3\TinyMCE\Application\Core\TinyMCE\Options\Skin;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Toolbar;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarMode;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarSticky;
+use OxidEsales\Eshop\Core\Registry;
 
 class Configuration
 {
@@ -113,6 +114,8 @@ class Configuration
         foreach ($this->options as $param => $value) {
             $sConfig .= "$param: $value, ";
         }
+
+        Registry::getLogger()->debug('TinyMCE configuration', [$sConfig]);
 
         return $sConfig;
     }
