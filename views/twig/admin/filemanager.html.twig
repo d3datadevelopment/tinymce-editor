@@ -139,7 +139,7 @@
   </tr>
   <tr>
     <td class="bottomLine">
-      &nbsp;&nbsp;&nbsp;&copy; <span id="copyYear"></span> RoxyFileman, <a href="https://www.d3data.de" target="_blank">(D3) Data Development</a>
+      &nbsp;&nbsp;&nbsp;&copy; <span id="copyYear"></span> RoxyFileman, <a href="https://www.d3data.de" target="_blank">D3 Data Dev.</a>
     </td>
     <td class="bottomLine">
       <div id="pnlStatus">Status bar</div>
