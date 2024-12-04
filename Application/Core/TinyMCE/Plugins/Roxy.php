@@ -23,8 +23,14 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Plugins;
 
+use O3\TinyMCE\Application\Model\Constants;
 use OxidEsales\Eshop\Core\Exception\FileException;
 use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class Roxy extends AbstractPlugin
 {
@@ -52,6 +58,12 @@ class Roxy extends AbstractPlugin
 
     public function requireScript(): bool
     {
-        return (bool) Registry::getConfig()->getConfigParam("blTinyMCE_filemanager");
+        try {
+            /** @var ModuleSettingService $service */
+            $service = ContainerFactory::getInstance()->getContainer()->get( ModuleSettingServiceInterface::class );
+            return $service->getBoolean( "blTinyMCE_filemanager", Constants::OXID_MODULE_ID );
+        } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
+            return false;
+        }
     }
 }

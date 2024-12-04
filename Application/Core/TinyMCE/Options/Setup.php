@@ -24,6 +24,12 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
 use O3\TinyMCE\Application\Core\TinyMCE\Utils;
+use O3\TinyMCE\Application\Model\Constants;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class Setup extends AbstractOption
 {
@@ -45,6 +51,12 @@ class Setup extends AbstractOption
      */
     public function requireRegistration(): bool
     {
-        return (bool) $this->loader->getShopConfig()->getConfigParam("blTinyMCE_filemanager");
+        try {
+            /** @var ModuleSettingService $service */
+            $service = ContainerFactory::getInstance()->getContainer()->get( ModuleSettingServiceInterface::class );
+            return $service->getBoolean( "blTinyMCE_filemanager", Constants::OXID_MODULE_ID );
+        } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
+            return false;
+        }
     }
 }
