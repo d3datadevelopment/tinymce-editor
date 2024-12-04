@@ -50,7 +50,7 @@ class Language extends AbstractOption
                 "ru" => "ru",
             ];
 
-            return $aLang[ $oLang->getLanguageAbbr( (int) $oLang->getTplLanguage() ) ] ?? "en";
+            return $aLang[ $oLang->getLanguageAbbr((int) $oLang->getTplLanguage()) ] ?? "en";
         } catch (LanguageNotFoundException) {
             return "en";
         }

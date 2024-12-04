@@ -60,8 +60,8 @@ class Roxy extends AbstractPlugin
     {
         try {
             /** @var ModuleSettingService $service */
-            $service = ContainerFactory::getInstance()->getContainer()->get( ModuleSettingServiceInterface::class );
-            return $service->getBoolean( "blTinyMCE_filemanager", Constants::OXID_MODULE_ID );
+            $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
+            return $service->getBoolean("blTinyMCE_filemanager", Constants::OXID_MODULE_ID);
         } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
             return false;
         }

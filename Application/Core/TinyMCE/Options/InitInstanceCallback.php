@@ -34,21 +34,21 @@ class InitInstanceCallback extends AbstractOption
         // https://github.com/tinymce/tinymce/issues/2271
 
         $js = <<<JS
-            function (editor) {
-                editor.on('PostProcess', function (e) {
-                    e.content = e.content.replace(
-                        /(&lt;!--mce:protected\s)(.*?)(--&gt;)/gm, 
-                        function(text, p1, p2, p3){
-                            if (unescape) {
-                                return unescape(p2);
-                            } else {
-                                return decodeURIComponent(p2);
+                function (editor) {
+                    editor.on('PostProcess', function (e) {
+                        e.content = e.content.replace(
+                            /(&lt;!--mce:protected\s)(.*?)(--&gt;)/gm, 
+                            function(text, p1, p2, p3){
+                                if (unescape) {
+                                    return unescape(p2);
+                                } else {
+                                    return decodeURIComponent(p2);
+                                }
                             }
-                        }
-                    );
-                });
-            }
-        JS;
+                        );
+                    });
+                }
+            JS;
 
         return (oxNew(Utils::class))->minifyJS($js);
     }

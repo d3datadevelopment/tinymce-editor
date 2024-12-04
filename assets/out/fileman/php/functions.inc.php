@@ -92,7 +92,7 @@ function fixPath(string $path): string
     $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/../../../../../../' . $path;
 
     $re = '/\/[^\/.]*\/\.\.\//mU';
-    while(preg_match($re, $path)) {
+    while (preg_match($re, $path)) {
         $path = preg_replace($re, "/", $path);
     }
 
@@ -182,7 +182,7 @@ class RoxyFile
         }
 
         $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1);
-        $return = self::CreatePath( $prev_path);
+        $return = self::CreatePath($prev_path);
         return $return && is_writable($prev_path) && mkdir($path);
     }
 
@@ -485,24 +485,24 @@ class RoxyImage
         string $type,
         ?string $destination = '',
         int $quality = 90
-    ): void
-    {
+    ): void {
         try {
-            if ( is_string( $img ) ) {
-                $img = self::GetImage( $img );
+            if (is_string($img)) {
+                $img = self::GetImage($img);
             }
 
-            switch ( strtolower( $type ) ) {
+            switch (strtolower($type)) {
                 case 'png':
-                    imagepng( $img, $destination );
+                    imagepng($img, $destination);
                     break;
                 case 'gif':
-                    imagegif( $img, $destination );
+                    imagegif($img, $destination);
                     break;
                 default:
-                    imagejpeg( $img, $destination, $quality );
+                    imagejpeg($img, $destination, $quality);
             }
-        } catch ( RuntimeException $e ) {}
+        } catch (RuntimeException $e) {
+        }
     }
 
     public static function SetAlpha(GdImage $img, string $path): GdImage
@@ -544,15 +544,16 @@ class RoxyImage
         }
 
         try {
-            $thumbImg = imagecreatetruecolor( (int) $newWidth, (int) $newHeight );
-            $img      = self::GetImage( $source );
+            $thumbImg = imagecreatetruecolor((int) $newWidth, (int) $newHeight);
+            $img      = self::GetImage($source);
 
-            $thumbImg = self::SetAlpha( $thumbImg, $source );
+            $thumbImg = self::SetAlpha($thumbImg, $source);
 
-            imagecopyresampled( $thumbImg, $img, 0, 0, 0, 0, (int) $newWidth, (int) $newHeight, $w, $h );
+            imagecopyresampled($thumbImg, $img, 0, 0, 0, 0, (int) $newWidth, (int) $newHeight, $w, $h);
 
-            self::OutputImage( $thumbImg, RoxyFile::GetExtension( basename( $source ) ), $destination, $quality );
-        } catch ( RuntimeException $e ) {}
+            self::OutputImage($thumbImg, RoxyFile::GetExtension(basename($source)), $destination, $quality);
+        } catch (RuntimeException $e) {
+        }
     }
 
     /**
@@ -576,34 +577,35 @@ class RoxyImage
         $h = $tmp[1];
 
         try {
-            if ( ( $w <= $width ) &&
-                 ( $h <= $height)
+            if (($w <= $width) &&
+                 ($h <= $height)
             ) {
-                self::OutputImage( self::GetImage( $source ), RoxyFile::GetExtension( basename( $source ) ), $destination, $quality );
+                self::OutputImage(self::GetImage($source), RoxyFile::GetExtension(basename($source)), $destination, $quality);
             }
             $ratio = $width / $height;
             $top   = $left = 0;
 
-            $cropWidth  = floor( $h * $ratio );
-            $cropHeight = floor( $cropWidth / $ratio );
-            if ( $cropWidth > $w ) {
+            $cropWidth  = floor($h * $ratio);
+            $cropHeight = floor($cropWidth / $ratio);
+            if ($cropWidth > $w) {
                 $cropWidth  = $w;
                 $cropHeight = $w / $ratio;
             }
-            if ( $cropHeight > $h ) {
+            if ($cropHeight > $h) {
                 $cropHeight = $h;
                 $cropWidth  = $h * $ratio;
             }
 
-            if ( $cropWidth < $w ) {
-                $left = floor( ( $w - $cropWidth ) / 2 );
+            if ($cropWidth < $w) {
+                $left = floor(($w - $cropWidth) / 2);
             }
-            if ( $cropHeight < $h ) {
-                $top = floor( ( $h - $cropHeight ) / 2 );
+            if ($cropHeight < $h) {
+                $top = floor(($h - $cropHeight) / 2);
             }
 
-            self::Crop( $source, $destination, (int) $left, (int) $top, $cropWidth, $cropHeight, $width, $height, $quality );
-        } catch (RuntimeException $e) {}
+            self::Crop($source, $destination, (int) $left, (int) $top, $cropWidth, $cropHeight, $width, $height, $quality);
+        } catch (RuntimeException $e) {
+        }
     }
 
     /**

@@ -71,10 +71,10 @@ $aModule          = [
             'type' => 'bool',
             'value' => true,
             'position' => 2,
-        ]
+        ],
     ],
     'events'       => [
         'onActivate'   => Events::class.'::onActivate',
-        'onDeactivate' => Events::class.'::onDeactivate'
+        'onDeactivate' => Events::class.'::onDeactivate',
     ],
 ];

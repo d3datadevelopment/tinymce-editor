@@ -38,10 +38,10 @@ class Setup extends AbstractOption
     public function get(): string
     {
         $js = <<<JS
-            (editor) => {
-                editor.options.register("filemanager_url", { processor: "string" });
-            }
-        JS;
+                (editor) => {
+                    editor.options.register("filemanager_url", { processor: "string" });
+                }
+            JS;
 
         return (oxNew(Utils::class))->minifyJS($js);
     }
@@ -53,8 +53,8 @@ class Setup extends AbstractOption
     {
         try {
             /** @var ModuleSettingService $service */
-            $service = ContainerFactory::getInstance()->getContainer()->get( ModuleSettingServiceInterface::class );
-            return $service->getBoolean( "blTinyMCE_filemanager", Constants::OXID_MODULE_ID );
+            $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
+            return $service->getBoolean("blTinyMCE_filemanager", Constants::OXID_MODULE_ID);
         } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
             return false;
         }

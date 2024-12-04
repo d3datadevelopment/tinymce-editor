@@ -47,7 +47,7 @@ class Loader
         $this->config = $config;
         $this->language = $language;
 
-        $this->configuration = oxNew( Configuration::class, $this );
+        $this->configuration = oxNew(Configuration::class, $this);
         $this->configuration->build();
     }
 
@@ -68,8 +68,8 @@ class Loader
 
         try {
             $engine = $this->getTemplateRenderer()->getTemplateEngine();
-            return $engine->render( '@' . Constants::OXID_MODULE_ID . '/admin/editorswitch' );
-        } catch ( NotFoundExceptionInterface|ContainerExceptionInterface) {
+            return $engine->render('@' . Constants::OXID_MODULE_ID . '/admin/editorswitch');
+        } catch (NotFoundExceptionInterface|ContainerExceptionInterface) {
             return '';
         }
     }
@@ -81,11 +81,11 @@ class Loader
     {
         try {
             /** @var ModuleSettingService $service */
-            $service = ContainerFactory::getInstance()->getContainer()->get( ModuleSettingServiceInterface::class );
+            $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
             /** @var string[] $aEnabledClasses */
-            $aEnabledClasses = $service->getCollection( "aTinyMCE_classes", Constants::OXID_MODULE_ID );
+            $aEnabledClasses = $service->getCollection("aTinyMCE_classes", Constants::OXID_MODULE_ID);
 
-            return in_array( $this->getShopConfig()->getActiveView()->getClassKey(), $aEnabledClasses );
+            return in_array($this->getShopConfig()->getActiveView()->getClassKey(), $aEnabledClasses);
         } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
             return false;
         }
@@ -98,7 +98,7 @@ class Loader
     {
         // D3 disabled, because isPlain method doesn't exist in OXID eShop
         return false;
-        
+
         //        /** @var BaseModel|Content $oEditObject */
         //        $oEditObject = $this->getShopConfig()->getActiveView()->getViewDataElement("edit");
         //        return $oEditObject instanceof Content && $oEditObject->isPlain();
@@ -140,7 +140,7 @@ class Loader
         return [
             $sCopyLongDescFromTinyMCE,
             $sUrlConverter,
-            $sInit
+            $sInit,
         ];
     }
 
@@ -158,7 +158,7 @@ class Loader
                 Registry::getConfig()->getActiveView()->getViewConfig()->getModuleUrl(
                     Constants::OXID_MODULE_ID,
                     'out/tinymce/tinymce.min.js'
-                )
+                ),
             ];
         } catch (FileException) {
             return [];
