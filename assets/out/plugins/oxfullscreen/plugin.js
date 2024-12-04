@@ -42,8 +42,8 @@
         return {
             getMetadata: () => {
                 return {
-                    name: "TinyMCE Fullscreen Editing Plugin for O3-Shop",
-                    url: "https://github.com/vanilla-thunder/oxid-module-tinymce"
+                    name: "TinyMCE Fullscreen Editing Plugin for OXID eShop",
+                    url: "https://git.d3data.de/D3Public/tinymce-editor"
                 };
             }
         };

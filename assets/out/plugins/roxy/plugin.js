@@ -50,8 +50,8 @@
         return {
             getMetadata: () => {
                 return {
-                    name: "Roxy Filemanager Plugin for O3-Shop",
-                    url: "https://gitlab.o3-shop.com/o3/tinymce-editor/"
+                    name: "Roxy Filemanager Plugin for OXID eShop",
+                    url: "https://git.d3data.de/D3Public/tinymce-editor"
                 };
             }
         };
