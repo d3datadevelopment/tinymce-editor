@@ -23,7 +23,7 @@
 function checkAccess(string $action): void
 {
     unset($action);
-    if ($_COOKIE['filemanagerkey'] !== md5_file("../../../../../../config.inc.php")) {
+    if ($_COOKIE['filemanagerkey'] !== md5_file(__DIR__."/../../../../../../../source/config.inc.php")) {
         die('nice try, noob.');
     }
 }
