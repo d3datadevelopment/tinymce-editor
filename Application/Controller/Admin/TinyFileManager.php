@@ -28,5 +28,5 @@ use OxidEsales\Eshop\Application\Controller\Admin\AdminController;
 
 class TinyFileManager extends AdminController
 {
-    protected $_sThisTemplate = '@' . Constants::OXID_MODULE_ID.'/admin/tinyfilemanager';
+    protected $_sThisTemplate = '@' . Constants::OXID_MODULE_ID.'/admin/filemanager';
 }
