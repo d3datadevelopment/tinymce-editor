@@ -1,29 +1,21 @@
 <?php
-/*
-  RoxyFileman - web based file manager. Ready to use with CKEditor, TinyMCE.
-  Can be easily integrated with any other WYSIWYG editor or CMS.
 
-  Copyright (C) 2013, RoxyFileman.com - Lyubomir Arsov. All rights reserved.
-  For licensing, see LICENSE.txt or http://RoxyFileman.com/license
+/**
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @copyright (C) 2022 Marat Bedoev, bestlife AG
+ * @copyright (C) 2023 O3-Shop (https://www.o3-shop.com)
+ * @copyright (C) D3 Data Development (Inh. Thomas Dartsch)
+ * @author    D3 Data Development - Daniel Seifert <info@shopmodule.com>
+ * @link      https://www.oxidmodule.com
+ */
 
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-  Contact: Lyubomir Arsov, liubo (at) web-lobby.com
-*/
 function checkAccess(string $action): void
 {
     unset($action);
     if ($_COOKIE['filemanagerkey'] !== md5_file(__DIR__."/../../../../../../../source/config.inc.php")) {
-        die('nice try, noob.');
+        header("HTTP/1.1 401 Unauthorized");
+        die();
     }
 }
