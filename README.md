@@ -1,4 +1,4 @@
-# O3-Shop TinyMCE WYSIWYG Editor for OXID eShop
+# OXID eShop TinyMCE WYSIWYG Editor
 
 This module integrates the [TinyMCE WYSIWYG editor](https://www.tiny.cloud/tinymce/) in the OXID shop backend.
 
@@ -12,16 +12,11 @@ $ composer require d3/tinymce-editor
 $ vendor/bin/oe-console oe:module:install source/modules/o3-shop/tinymce-editor
 ```
 
-After requiring the module, you need to activate it, either via OXID shop admin or CLI.
+After requiring the module, you need to activate it, either via OXID shop admin or CLI:
 
-Navigate to shop folder and execute the following: 
 ```bash
 $ vendor/bin/oe-console oe:module:activate o3-tinymce-editor
 ```
-
-### How to use
-
-Activate the module.
 
 ## Contributing
 
