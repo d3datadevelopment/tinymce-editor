@@ -23,6 +23,10 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use O3\TinyMCE\Application\Model\Constants;
+use OxidEsales\Eshop\Core\Exception\FileException;
+use OxidEsales\Eshop\Core\Registry;
+
 class BaseUrl extends AbstractOption
 {
     protected string $key = 'base_url';
@@ -32,8 +36,14 @@ class BaseUrl extends AbstractOption
      */
     public function get(): string
     {
-        return $this->loader->getShopConfig()->getActiveView()->getViewConfig()->getBaseDir() .
-               'modules/o3-shop/tinymce-editor/out/tinymce/';
+        try {
+            return Registry::getConfig()->getActiveView()->getViewConfig()->getModuleUrl(
+                Constants::OXID_MODULE_ID,
+                'out/tinymce/'
+            );
+        } catch (FileException) {
+            return '';
+        }
     }
 
     /**

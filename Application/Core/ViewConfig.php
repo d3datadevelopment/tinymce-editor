@@ -24,22 +24,37 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core;
 
 use O3\TinyMCE\Application\Core\TinyMCE\Loader;
-use OxidEsales\Eshop\Core\Exception\FileException;
 use OxidEsales\Eshop\Core\Registry;
 
 class ViewConfig extends ViewConfig_parent
 {
     /**
      * @return string
-     * @throws FileException
      */
-    public function loadTinyMce(): string
+    public function getTinyMceInitCode(): string
     {
         $config = Registry::getConfig();
         $language = Registry::getLang();
 
         $loader = oxNew(Loader::class, $config, $language);
-
         return $loader->getEditorCode();
+    }
+
+    public function getTinyMceScripts(): array
+    {
+        $config = Registry::getConfig();
+        $language = Registry::getLang();
+
+        $loader = oxNew(Loader::class, $config, $language);
+        return $loader->getScripts();
+    }
+
+    public function getTinyMceIncludes(): array
+    {
+        $config = Registry::getConfig();
+        $language = Registry::getLang();
+
+        $loader = oxNew(Loader::class, $config, $language);
+        return $loader->getIncludes();
     }
 }
