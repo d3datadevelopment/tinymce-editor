@@ -1,11 +1,23 @@
-# Changelog for O3-Shop TinyMCE Editor plugin
+# Changelog for OXID eShop TinyMCE Editor plugin
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased](https://git.d3data.de/D3Public/tinymce-editor/compare/1.1.0...rel_1.x)
+## [unreleased](https://git.d3data.de/D3Public/tinymce-editor/compare/2.0.0...rel_2.x)
+
+## [2.0.0](https://git.d3data.de/D3Public/tinymce-editor/compare/1.1.0...2.0.0) - 2024-12-05
+
+Added
+- installable in OXID 7.x
+- Smarty and Twig support
+
+Changed
+- HTTP header in case of unauthorized access
+
+Removed
+- OXID 6.x support
 
 ## [1.1.0](https://git.d3data.de/D3Public/tinymce-editor/compare/1.0.0...1.1.0) - 2024-12-03
 
