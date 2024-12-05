@@ -21,10 +21,10 @@ $aModule          = [
     'id' => Constants::OXID_MODULE_ID,
     'title' => 'TinyMCE Editor',
     'description' => 'TinyMCE integration for OXID eShop',
-    'thumbnail' => 'logo.png',
+    'thumbnail' => 'picture.svg',
     'version' => '2.0.0',
     'author' => 'D3 Data Development, O3-Shop, Marat Bedoev',
-    'url' => 'https://www.o3-shop.com/',
+    'url' => 'https://www.d3data.de/',
     'extend' => [
         OxidEsales\Eshop\Core\ViewConfig::class => O3\TinyMCE\Application\Core\ViewConfig::class,
     ],
