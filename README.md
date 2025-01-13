@@ -1,4 +1,8 @@
-# OXID eShop TinyMCE WYSIWYG Editor
+![stability mature](https://img.shields.io/badge/stability-stable-008000.svg)
+[![latest tag](https://img.shields.io/packagist/v/d3/tinymce-editor?label=release)](https://packagist.org/packages/d3/tinymce-editor)
+[![MIT License](https://img.shields.io/packagist/l/d3/tinymce-editor)](https://github.com/d3datadevelopment/tinymce-editor/blob/main/LICENSE.md)
+
+# TinyMCE WYSIWYG Editor for OXID eShop
 
 This module integrates the [TinyMCE WYSIWYG editor](https://www.tiny.cloud/tinymce/) in the OXID shop backend.
 
