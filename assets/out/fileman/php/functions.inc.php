@@ -97,8 +97,7 @@ function fixPath(string $path): string
     }
 
     $path = str_replace('\\', '/', $path);
-    $path = RoxyFile::FixPath($path);
-    return $path;
+    return RoxyFile::FixPath($path);
 }
 
 function getResultStr(string $type, string $str = ''): string
@@ -160,7 +159,7 @@ class RoxyFile
         if (self::CreatePath($dir)) {
             $dir = self::FixPath($dir . '/');
             $testFile = 'writetest.txt';
-            $f = @fopen($dir . $testFile, 'w', false);
+            $f = @fopen($dir . $testFile, 'w');
             if ($f) {
                 fclose($f);
                 $ret = true;
@@ -272,8 +271,7 @@ class RoxyFile
             $filesize = $filesize / 1024;
         }
 
-        $ret = round($filesize, 2) . ' ' . $unit;
-        return $ret;
+        return round($filesize, 2) . ' ' . $unit;
     }
 
     /**
@@ -284,37 +282,20 @@ class RoxyFile
      */
     public static function GetMIMEType(string $filename): string
     {
-        $ext = self::GetExtension($filename);
-
-        switch (strtolower($ext)) {
-            case 'jpg':
-            case 'jpeg':
-                return 'image/jpeg';
-            case 'gif':
-                return 'image/gif';
-            case 'png':
-                return 'image/png';
-            case 'bmp':
-                return 'image/bmp';
-            case 'webp':
-                return 'image/webp';
-            case 'tiff':
-            case 'tif':
-                return 'image/tiff';
-            case 'pdf':
-                return 'application/pdf';
-            case 'rtf':
-            case 'doc':
-                return 'application/msword';
-            case 'xls':
-                return 'application/vnd.ms-excel';
-            case 'zip':
-                return 'application/zip';
-            case 'swf':
-                return 'application/x-shockwave-flash';
-            default:
-                return 'application/octet-stream';
-        }
+        return match ( strtolower( self::GetExtension($filename) ) ) {
+            'jpg', 'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'png' => 'image/png',
+            'bmp' => 'image/bmp',
+            'webp' => 'image/webp',
+            'tiff', 'tif' => 'image/tiff',
+            'pdf' => 'application/pdf',
+            'rtf', 'doc' => 'application/msword',
+            'xls' => 'application/vnd.ms-excel',
+            'zip' => 'application/zip',
+            'swf' => 'application/x-shockwave-flash',
+            default => 'application/octet-stream',
+        };
     }
 
     /**
@@ -340,9 +321,7 @@ class RoxyFile
         $str = str_replace('.php', '', $str);
         $str = (string) mb_ereg_replace("[^\\w]", $sep, $name);
 
-        $str = (string) mb_ereg_replace("$sep+", $sep, $str) . ($ext ? '.' . $ext : '');
-
-        return $str;
+        return mb_ereg_replace("$sep+", $sep, $str) . ($ext ? '.' . $ext : '');
     }
 
     /**
@@ -395,14 +374,12 @@ class RoxyFile
 
     public static function FixPath(string $path): string
     {
-        $path = (string) mb_ereg_replace('[\\\/]+', '/', $path);
-        //$path = (string) mb_ereg_replace('\.\.\/', '', $path);
-
-        return $path;
+        return (string) mb_ereg_replace('[\\\/]+', '/', $path);
+        //return (string) mb_ereg_replace('\.\.\/', '', $path);
     }
 
     /**
-     * creates unique file name using $filename( " - Copy " and number is added if file already exists) in directory $dir
+     * creates a unique file name using $filename(" - Copy " and number is added if file already exists) in directory $dir
      *
      * @param string $dir
      * @param string $filename
@@ -410,7 +387,6 @@ class RoxyFile
      */
     public static function MakeUniqueFilename(string $dir, string $filename): string
     {
-        ;
         $dir .= '/';
         $dir = self::FixPath($dir . '/');
         $ext = self::GetExtension($filename);
@@ -461,17 +437,11 @@ class RoxyImage
 {
     public static function GetImage(string $path): GdImage
     {
-        $ext = RoxyFile::GetExtension(basename($path));
-        switch ($ext) {
-            case 'png':
-                $img = imagecreatefrompng($path);
-                break;
-            case 'gif':
-                $img = imagecreatefromgif($path);
-                break;
-            default:
-                $img = imagecreatefromjpeg($path);
-        }
+        $img = match ( RoxyFile::GetExtension(basename($path) ) {
+            'png' => imagecreatefrompng( $path ),
+            'gif' => imagecreatefromgif( $path ),
+            default => imagecreatefromjpeg( $path ),
+        };
 
         if (!$img) {
             throw new RuntimeException('Cannot open image');
