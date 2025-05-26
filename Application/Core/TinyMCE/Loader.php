@@ -27,6 +27,7 @@ use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRenderer;
 use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRendererBridgeInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Throwable;
 
 class Loader
 {
@@ -78,7 +79,7 @@ class Loader
             $aEnabledClasses = $service->getCollection("aTinyMCE_classes", Constants::OXID_MODULE_ID);
 
             return in_array($this->getShopConfig()->getActiveView()->getClassKey(), $aEnabledClasses);
-        } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
+        } catch (Throwable) {
             return false;
         }
     }

@@ -20,8 +20,7 @@ use O3\TinyMCE\Application\Model\Constants;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
+use Throwable;
 
 class Setup extends AbstractOption
 {
@@ -47,7 +46,7 @@ class Setup extends AbstractOption
             /** @var ModuleSettingService $service */
             $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
             return $service->getBoolean("blTinyMCE_filemanager", Constants::OXID_MODULE_ID);
-        } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
+        } catch (Throwable) {
             return false;
         }
     }
