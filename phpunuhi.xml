@@ -1,0 +1,16 @@
+<phpunuhi
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../boxblinkracer/phpunuhi/config.xsd"
+>
+    <translations>
+        <set name="Backend">
+            <format>
+                <php/>
+            </format>
+            <locales>
+                <locale name="de">./Application/views/de/tinymce_translations.php</locale>
+                <locale name="en">./Application/views/en/tinymce_translations.php</locale>
+            </locales>
+        </set>
+    </translations>
+</phpunuhi>

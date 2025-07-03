@@ -21,8 +21,7 @@ use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
+use Throwable;
 
 class Roxy extends AbstractPlugin
 {
@@ -54,7 +53,7 @@ class Roxy extends AbstractPlugin
             /** @var ModuleSettingService $service */
             $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
             return $service->getBoolean("blTinyMCE_filemanager", Constants::OXID_MODULE_ID);
-        } catch (ContainerExceptionInterface|NotFoundExceptionInterface) {
+        } catch ( Throwable) {
             return false;
         }
     }
