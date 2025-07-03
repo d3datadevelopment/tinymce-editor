@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased](https://git.d3data.de/D3Public/tinymce-editor/compare/2.0.0...rel_2.x)
+## [unreleased](https://git.d3data.de/D3Public/tinymce-editor/compare/2.1.0...rel_2.x)
+
+## [2.1.0](https://git.d3data.de/D3Public/tinymce-editor/compare/2.0.0...2.1.0) - 2025-07-03
+
 ### Changed
 - restore isPlain check
+- resources are going saved with absolute urls
 
 ## [2.0.0](https://git.d3data.de/D3Public/tinymce-editor/compare/1.1.0...2.0.0) - 2024-12-05
 

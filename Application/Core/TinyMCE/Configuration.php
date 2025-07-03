@@ -36,6 +36,7 @@ use O3\TinyMCE\Application\Core\TinyMCE\Options\Promotion;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Protect;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\QuickbarsInsertToolbar;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\RelativeUrls;
+use O3\TinyMCE\Application\Core\TinyMCE\Options\RemoveScriptHost;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Resize;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Selector;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Setup;
@@ -147,6 +148,7 @@ class Configuration
     {
         $this->addOption(oxNew(EntityEncoding::class, $this->loader));
         $this->addOption(oxNew(Protect::class, $this->loader));
+        $this->addOption(oxNew(RemoveScriptHost::class, $this->loader));
     }
 
     protected function addLocalizationOptions(): void

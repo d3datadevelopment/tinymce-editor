@@ -21,6 +21,6 @@ class RelativeUrls extends AbstractOption
 
     public function get(): string
     {
-        return 'true';
+        return 'false';
     }
 }
