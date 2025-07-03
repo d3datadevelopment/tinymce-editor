@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [unreleased](https://git.d3data.de/D3Public/tinymce-editor/compare/1.1.0...rel_1.x)
 ### Changed
 - restore isPlain check
+- resources are going saved with absolute urls
 
 ## [1.1.0](https://git.d3data.de/D3Public/tinymce-editor/compare/1.0.0...1.1.0) - 2024-12-03
 

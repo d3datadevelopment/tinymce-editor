@@ -23,9 +23,9 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-class RelativeUrls extends AbstractOption
+class RemoveScriptHost extends AbstractOption
 {
-    protected string $key = 'relative_urls';
+    protected string $key = 'remove_script_host';
 
     public function get(): string
     {
