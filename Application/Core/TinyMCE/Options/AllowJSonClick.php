@@ -6,4 +6,10 @@ namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
 class AllowJSonClick extends AbstractOption
 {
+    protected string $key = 'extended_valid_elements';
+
+    public function get(): string
+    {
+        return '"div[onclick]"';
+    }
 }
