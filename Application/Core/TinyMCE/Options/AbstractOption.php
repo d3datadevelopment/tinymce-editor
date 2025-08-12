@@ -21,11 +21,8 @@ abstract class AbstractOption implements OptionInterface
 {
     protected string $key = 'undefinedKey';
 
-    protected Loader $loader;
-
-    public function __construct(Loader $loader)
+    public function __construct(protected Loader $loader)
     {
-        $this->loader = $loader;
     }
 
     /**

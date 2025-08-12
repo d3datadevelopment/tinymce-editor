@@ -31,15 +31,10 @@ use Throwable;
 
 class Loader
 {
-    protected Config $config;
-    protected Language $language;
     protected Configuration $configuration;
 
-    public function __construct(Config $config, Language $language)
+    public function __construct(protected Config $config, protected Language $language)
     {
-        $this->config = $config;
-        $this->language = $language;
-
         $this->configuration = oxNew(Configuration::class, $this);
         $this->configuration->build();
     }

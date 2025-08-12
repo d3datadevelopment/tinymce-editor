@@ -26,7 +26,7 @@ class Toolbar extends AbstractOption
 
     protected bool $forceSingleLineToolbar = true;
 
-    public function __construct(Loader $loader)
+    public function __construct(protected Loader $loader)
     {
         parent::__construct($loader);
     }

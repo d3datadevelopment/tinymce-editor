@@ -48,13 +48,11 @@ use OxidEsales\Eshop\Core\Registry;
 
 class Configuration
 {
-    protected Loader $loader;
     /** @var array<String, String> */
     protected array $options = [];
 
-    public function __construct(Loader $loader)
+    public function __construct(protected Loader $loader)
     {
-        $this->loader = $loader;
     }
 
     public function build(): void
