@@ -70,6 +70,13 @@ $aModule          = [
             'type' => 'bool',
             'value' => true,
             'position' => 2,
+        ],
+        [
+            'group' => 'tinyMceAdvanced',
+            'name' => 'blTinyMCE_allowjavascript',
+            'type' => 'bool',
+            'value' => false,
+            'position' => 2,
         ]
     ],
     'events'       => [
