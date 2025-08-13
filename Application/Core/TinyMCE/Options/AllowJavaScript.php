@@ -17,4 +17,9 @@ class AllowJavaScript extends AbstractOption
     {
         return (bool) $this->loader->getShopConfig()->getConfigParam("blTinyMCE_allowjavascript");
     }
+
+    public function isQuoted(): bool
+    {
+        return true;
+    }
 }
