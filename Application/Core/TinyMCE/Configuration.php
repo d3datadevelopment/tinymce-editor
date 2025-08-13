@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE;
 
-use O3\TinyMCE\Application\Core\TinyMCE\Options\AllowJSonClick;
+use O3\TinyMCE\Application\Core\TinyMCE\Options\AllowJavaScript;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\BaseUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\CacheSuffix;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ContentCss;
@@ -156,7 +156,7 @@ class Configuration
         $this->addOption(oxNew(EntityEncoding::class, $this->loader));
         $this->addOption(oxNew(Protect::class, $this->loader));
         $this->addOption(oxNew(RemoveScriptHost::class, $this->loader));
-        $this->addOption(oxNew(AllowJSonClick::class, $this->loader));
+        $this->addOption(oxNew(AllowJavaScript::class, $this->loader));
     }
 
     protected function addLocalizationOptions(): void
