@@ -1,6 +1,12 @@
 {
   "name": "d3/tinymce-editor",
-  "description": "TinyMCE 6 Integration for OXID-Shop",
+  "description": "TinyMCE Integration for OXID-Shop",
+  "keywords": [
+    "TinyMCE",
+    "WYSIWYG",
+    "Editor",
+    "OXID"
+  ],
   "type": "oxideshop-module",
   "homepage": "https://www.o3-shop.com/",
   "license": [
