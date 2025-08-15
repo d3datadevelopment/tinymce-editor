@@ -31,5 +31,9 @@ $aLang = [
     'HELP_SHOP_MODULE_aTinyMCE_classes'      => 'für die Benutzung von TinyMCE in eigenen Admin Views muss hier die entsprechende Controllerklasse eingetragen werden, dann wird für jedes Textarea je ein Editor erzeugt',
     'SHOP_MODULE_GROUP_tinyMceSettings'      => 'TinyMCE Einstellungen &amp; Plugins',
     'SHOP_MODULE_GROUP_tinyMceAdvanced'      => '<style>.groupExp dl dd li {margin-left: 300px;} .groupExp dd h3 {border-bottom: none; margin-bottom: 0;} .groupExp dt .txtfield {margin-top: 33px;}</style>Erweiterte Einstellungen',
-    'SHOP_MODULE_blTinyMCE_allowjavascript'  => 'JavaScript aktivieren',
+    'SHOP_MODULE_blTinyMCE_allowUnsafeElements'  => 'unsichere HTML Elemente und deren Attribute erlauben',
+    'HELP_SHOP_MODULE_blTinyMCE_allowUnsafeElements'  => <<<HTML
+        deaktiviert den Editor-eigenen Elementfilter<br>
+        unsichere Elemente können Schadcode auf Ihrer Seite erlauben, aktivieren Sie die Option daher mit Bedacht!
+HTML,
 ];

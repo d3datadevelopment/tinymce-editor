@@ -23,14 +23,12 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE;
 
-use O3\TinyMCE\Application\Core\TinyMCE\Options\AllowJavaScript;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\BaseUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\CacheSuffix;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ContentCss;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ContextMenu;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\DocumentBaseUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\EntityEncoding;
-use O3\TinyMCE\Application\Core\TinyMCE\Options\ExtendedValidElements;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ExternalPlugins;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\FilemanagerUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ImageAdvtab;
@@ -55,6 +53,7 @@ use O3\TinyMCE\Application\Core\TinyMCE\Options\Skin;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Toolbar;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarMode;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarSticky;
+use O3\TinyMCE\Application\Core\TinyMCE\Options\ValidElements;
 
 class Configuration
 {
@@ -157,7 +156,7 @@ class Configuration
         $this->addOption(oxNew(EntityEncoding::class, $this->loader));
         $this->addOption(oxNew(Protect::class, $this->loader));
         $this->addOption(oxNew(RemoveScriptHost::class, $this->loader));
-        $this->addOption(oxNew(ExtendedValidElements::class, $this->loader));
+        $this->addOption(oxNew(ValidElements::class, $this->loader));
     }
 
     protected function addLocalizationOptions(): void

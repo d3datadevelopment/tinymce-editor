@@ -73,7 +73,7 @@ $aModule          = [
         ],
         [
             'group' => 'tinyMceAdvanced',
-            'name' => 'blTinyMCE_allowjavascript',
+            'name' => 'blTinyMCE_allowUnsafeElements',
             'type' => 'bool',
             'value' => false,
             'position' => 2,

@@ -31,5 +31,9 @@ $aLang = [
     'HELP_SHOP_MODULE_aTinyMCE_classes'      => 'if you want to use TinyMCE for your custom controllers, you need to enter their class names here.',
     'SHOP_MODULE_GROUP_tinyMceSettings'      => 'TinyMCE Settings &amp; Plugins',
     'SHOP_MODULE_GROUP_tinyMceAdvanced'      => '<style>.groupExp dl dd li {margin-left: 300px;} .groupExp dd h3 {border-bottom: none; margin-bottom: 0;} .groupExp dt .txtfield {margin-top: 33px;}</style>advanced settings',
-    'SHOP_MODULE_blTinyMCE_allowjavascript'  => 'activate JavaScript ',
+    'SHOP_MODULE_blTinyMCE_allowUnsafeElements'  => 'allow unsafe HTML elements and its attributes',
+    'HELP_SHOP_MODULE_blTinyMCE_allowUnsafeElements'  => <<<HTML
+        disables the editor's own element filter.<br>
+Unsecure elements can allow malicious code on your page, so use this option with caution!
+HTML,
 ];

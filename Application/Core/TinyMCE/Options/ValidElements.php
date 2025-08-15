@@ -1,12 +1,30 @@
 <?php
 
+/**
+ * This file is part of O3-Shop TinyMCE editor module.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with O3-Shop.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright  Copyright (c) 2025 D3 Data Development (Inh. Thomas Dartsch) (https://www.d3data.de)
+ * @license    https://www.gnu.org/licenses/gpl-3.0  GNU General Public License 3 (GPLv3)
+ */
+
 declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-class ExtendedValidElements extends AbstractOption
+class ValidElements extends AbstractOption
 {
-    protected string $key = 'extended_valid_elements';
+    protected string $key = 'valid_elements';
 
     public function get(): string
     {
@@ -16,12 +34,6 @@ class ExtendedValidElements extends AbstractOption
         );
     }
 
-    public function requireRegistration(): bool
-    {
-        return $this->loader->getShopConfig()->getConfigParam("blTinyMCE_allowjavascript") ||
-            0;
-    }
-
     public function isQuoted(): bool
     {
         return true;
@@ -29,30 +41,13 @@ class ExtendedValidElements extends AbstractOption
 
     protected function getElementsList(): array
     {
-        return array_merge(
-            $this->loader->getShopConfig()->getConfigParam("blTinyMCE_allowjavascript") ?
-                $this->getJSElementsList() :
-                []
-        );
+        return [
+            '*[*]'
+        ];
     }
 
-    protected function getJSElementsList(): array
+    public function requireRegistration(): bool
     {
-        return [
-            'div[onclick|ondblclick|onmousedown|onmouseup|onmouseover|onmouseout|onmousemove|onmouseenter|onmouseleave]',
-            'span[onclick|ondblclick|onmousedown|onmouseup|onmouseover|onmouseout|onmousemove|onmouseenter|onmouseleave]',
-            'a[href|target|onclick|onmouseover|onmouseout]',
-            'button[type|onclick|onmousedown|onmouseup|onmouseover|onmouseout]',
-            'input[type|value|name|onclick|onchange|onfocus|onblur]',
-            'textarea[name|onclick|onchange|onfocus|onblur]',
-            'select[name|onchange|onclick|onfocus|onblur]',
-            'option[value|onclick],form[action|method|onsubmit|onreset]',
-            'label[for|onclick]',
-            'img[src|alt|title|onclick|onload|onerror]',
-            'script[src|type|defer|async]',
-            'p[onclick|onmouseover|onmouseout]',
-            'section[onclick|onmouseover|onmouseout]',
-            'article[onclick|onmouseover|onmouseout]'
-        ];
+        return (bool) $this->loader->getShopConfig()->getConfigParam("blTinyMCE_allowUnsafeElements");
     }
 }
