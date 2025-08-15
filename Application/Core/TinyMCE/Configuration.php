@@ -30,6 +30,7 @@ use O3\TinyMCE\Application\Core\TinyMCE\Options\ContentCss;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ContextMenu;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\DocumentBaseUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\EntityEncoding;
+use O3\TinyMCE\Application\Core\TinyMCE\Options\ExtendedValidElements;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ExternalPlugins;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\FilemanagerUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ImageAdvtab;
@@ -156,7 +157,7 @@ class Configuration
         $this->addOption(oxNew(EntityEncoding::class, $this->loader));
         $this->addOption(oxNew(Protect::class, $this->loader));
         $this->addOption(oxNew(RemoveScriptHost::class, $this->loader));
-        $this->addOption(oxNew(AllowJavaScript::class, $this->loader));
+        $this->addOption(oxNew(ExtendedValidElements::class, $this->loader));
     }
 
     protected function addLocalizationOptions(): void
