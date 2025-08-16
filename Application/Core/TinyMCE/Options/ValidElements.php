@@ -15,6 +15,10 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use O3\TinyMCE\Application\Model\Constants;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+
 class ValidElements extends AbstractOption
 {
     protected string $key = 'valid_elements';
@@ -41,6 +45,7 @@ class ValidElements extends AbstractOption
 
     public function requireRegistration(): bool
     {
-        return (bool) $this->loader->getShopConfig()->getConfigParam("blTinyMCE_allowUnsafeElements");
+        $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
+        return $service->getBoolean("blTinyMCE_allowUnsafeElements", Constants::OXID_MODULE_ID);
     }
 }
