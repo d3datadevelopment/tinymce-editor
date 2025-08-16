@@ -64,6 +64,13 @@ $aModule          = [
             'value' => true,
             'position' => 2,
         ],
+        [
+            'group' => 'tinyMceAdvanced',
+            'name' => 'blTinyMCE_allowUnsafeElements',
+            'type' => 'bool',
+            'value' => false,
+            'position' => 0,
+        ],
     ],
     'events'       => [
         'onActivate'   => Events::class.'::onActivate',

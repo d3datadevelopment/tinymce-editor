@@ -44,6 +44,7 @@ use O3\TinyMCE\Application\Core\TinyMCE\Options\Skin;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Toolbar;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarMode;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarSticky;
+use O3\TinyMCE\Application\Core\TinyMCE\Options\ValidElements;
 use OxidEsales\Eshop\Core\Registry;
 
 class Configuration
@@ -147,6 +148,7 @@ class Configuration
         $this->addOption(oxNew(EntityEncoding::class, $this->loader));
         $this->addOption(oxNew(Protect::class, $this->loader));
         $this->addOption(oxNew(RemoveScriptHost::class, $this->loader));
+        $this->addOption(oxNew(ValidElements::class, $this->loader));
     }
 
     protected function addLocalizationOptions(): void
