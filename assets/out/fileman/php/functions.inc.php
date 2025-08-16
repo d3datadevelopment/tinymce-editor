@@ -437,7 +437,7 @@ class RoxyImage
 {
     public static function GetImage(string $path): GdImage
     {
-        $img = match ( RoxyFile::GetExtension(basename($path) ) {
+        $img = match ( RoxyFile::GetExtension(basename($path) )) {
             'png' => imagecreatefrompng( $path ),
             'gif' => imagecreatefromgif( $path ),
             default => imagecreatefromjpeg( $path ),
