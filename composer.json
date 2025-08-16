@@ -31,7 +31,7 @@
   },
   "require": {
     "php": "^8.0",
-    "oxid-esales/oxideshop-ce": "7.0 - 7.2",
+    "oxid-esales/oxideshop-ce": "7.0 - 7.3",
     "d3/oxidservicebridges": "^2.1",
     "d3/oxid-twig-extensions": "^1.3"
   },
