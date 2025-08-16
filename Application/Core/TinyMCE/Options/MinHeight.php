@@ -28,10 +28,10 @@ class MinHeight extends AbstractOption
         if (array_key_exists(1, $profile)) {
             return (string) max(
                 $profile[1] * 20,
-                350
+                450
             );
         }
 
-        return "350";
+        return "450";
     }
 }

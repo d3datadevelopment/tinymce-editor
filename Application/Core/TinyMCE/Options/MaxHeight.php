@@ -23,9 +23,4 @@ class MaxHeight extends AbstractOption
     {
         return '500';
     }
-
-    public function isQuoted(): bool
-    {
-        return true;
-    }
 }
