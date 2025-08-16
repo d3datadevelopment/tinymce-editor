@@ -10,7 +10,20 @@ This module integrates the [TinyMCE WYSIWYG editor](https://www.tiny.cloud/tinym
 
 ### Install
 
+Please enter the following section in the `composer.json` of your project:
+
+```
+  "extra": {
+    "ajgl-symlinks": {
+      "tinymce/tinymce": {
+        ".": "source/out/modules/tinymce"
+      }
+    }
+  }
+```
+
 Module can be installed manually, by using composer:
+
 ```bash
 $ composer require d3/tinymce-editor
 $ vendor/bin/oe-console oe:module:install source/modules/o3-shop/tinymce-editor
@@ -42,15 +55,6 @@ GPLv3, see [LICENSE file](LICENSE).
 - the original module was created by Marat Bedoev, bestlife AG <oxid@bestlife.ag> and published under the GPL v3 licence
 
 ## Further licenses
-
-### TinyMCE editor [GPL v2]
-(https://github.com/tinymce/tinymce-dist - status: 2024-12-02)
-
-```
-TinyMCE – https://github.com/tinymce/tinymce Copyright (c) 2024, Ephox Corporation DBA Tiny Technologies, Inc.
-
-Licensed under the terms of GNU General Public License Version 2 or later.
-```
 
 ### Roxy file manager [GPL v3]
 (status: 2023-04-07)

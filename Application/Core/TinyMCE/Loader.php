@@ -144,8 +144,8 @@ class Loader
         try {
             return [
                 Registry::getConfig()->getActiveView()->getViewConfig()->getModuleUrl(
-                    Constants::OXID_MODULE_ID,
-                    'out/tinymce/tinymce.min.js'
+                    'tinymce/tinymce',
+                    'tinymce.min.js'
                 ),
             ];
         } catch (FileException) {

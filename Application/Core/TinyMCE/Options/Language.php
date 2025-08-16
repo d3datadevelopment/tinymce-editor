@@ -35,9 +35,9 @@ class Language extends AbstractOption
                 "cs" => "cs",
                 "da" => "da",
                 "de" => "de",
-                "es" => "es_419",
+                "es" => "es",
                 "fr" => "fr_FR",
-                "it" => "it_IT",
+                "it" => "it",
                 "nl" => "nl",
                 "ru" => "ru",
             ];

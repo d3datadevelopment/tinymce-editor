@@ -26,6 +26,7 @@ use O3\TinyMCE\Application\Core\TinyMCE\Options\FilemanagerUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\ImageAdvtab;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\InitInstanceCallback;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Language;
+use O3\TinyMCE\Application\Core\TinyMCE\Options\LanguageUrl;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\LicenseKey;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\MaxHeight;
 use O3\TinyMCE\Application\Core\TinyMCE\Options\Menubar;
@@ -154,6 +155,7 @@ class Configuration
     protected function addLocalizationOptions(): void
     {
         $this->addOption(oxNew(Language::class, $this->loader));
+        $this->addOption(oxNew(LanguageUrl::class, $this->loader));
     }
 
     protected function addUrlHandling(): void
