@@ -19,7 +19,7 @@ use O3\TinyMCE\Application\Core\TinyMCE\Loader;
 
 interface OptionInterface
 {
-    public function __construct(protected Loader $loader);
+    public function __construct(Loader $loader);
 
     public function getKey(): string;
 
