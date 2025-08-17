@@ -39,7 +39,7 @@ class ValidElements extends AbstractOption
     protected function getElementsList(): array
     {
         return [
-            '*[*]'
+            '*[*]',
         ];
     }
 

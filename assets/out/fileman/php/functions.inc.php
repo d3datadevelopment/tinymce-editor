@@ -282,7 +282,7 @@ class RoxyFile
      */
     public static function GetMIMEType(string $filename): string
     {
-        return match ( strtolower( self::GetExtension($filename) ) ) {
+        return match (strtolower(self::GetExtension($filename))) {
             'jpg', 'jpeg' => 'image/jpeg',
             'gif' => 'image/gif',
             'png' => 'image/png',
@@ -437,10 +437,10 @@ class RoxyImage
 {
     public static function GetImage(string $path): GdImage
     {
-        $img = match ( RoxyFile::GetExtension(basename($path) )) {
-            'png' => imagecreatefrompng( $path ),
-            'gif' => imagecreatefromgif( $path ),
-            default => imagecreatefromjpeg( $path ),
+        $img = match (RoxyFile::GetExtension(basename($path))) {
+            'png' => imagecreatefrompng($path),
+            'gif' => imagecreatefromgif($path),
+            default => imagecreatefromjpeg($path),
         };
 
         if (!$img) {
