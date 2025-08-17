@@ -21,6 +21,6 @@ class MaxHeight extends AbstractOption
 
     public function get(): string
     {
-        return '500';
+        return '450';
     }
 }
