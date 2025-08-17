@@ -5,14 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased](https://git.d3data.de/D3Public/tinymce-editor/compare/2.1.0...rel_2.x)
+## [unreleased](https://git.d3data.de/D3Public/tinymce-editor/compare/2.2.0...rel_2.x)
+
+## [2.2.0](https://git.d3data.de/D3Public/tinymce-editor/compare/2.1.0...2.2.0) - 2025-08-17
 
 ### Added
 - installable in OXID 7.3
 - "allow unsafe elements" option
 
 ### Changed
-- bump TinyMCE to 7.9.1
+- bump TinyMCE to 8.0.2
 - get TinyMCE editor files from composer package
 - align editor size
 
