@@ -71,9 +71,12 @@ class Loader
             /** @var ModuleSettingService $service */
             $service = ContainerFactory::getInstance()->getContainer()->get(ModuleSettingServiceInterface::class);
             /** @var string[] $aEnabledClasses */
-            $aEnabledClasses = $service->getCollection("aTinyMCE_classes", Constants::OXID_MODULE_ID);
+            $aEnabledClasses = array_map(
+                'strtolower',
+                $service->getCollection("aTinyMCE_classes", Constants::OXID_MODULE_ID)
+            );
 
-            return in_array($this->getShopConfig()->getActiveView()->getClassKey(), $aEnabledClasses);
+            return in_array(strtolower($this->getShopConfig()->getActiveView()->getClassKey()), $aEnabledClasses);
         } catch (Throwable) {
             return false;
         }
