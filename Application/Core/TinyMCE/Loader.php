@@ -72,10 +72,17 @@ class Loader
      */
     protected function isEnabledForCurrentController(): bool
     {
-        /** @var string[] $aEnabledClasses */
-        $aEnabledClasses = $this->getShopConfig()->getConfigParam("aTinyMCE_classes", []);
+        try {
+            /** @var string[] $aEnabledClasses */
+            $aEnabledClasses = array_map(
+                'strtolower',
+                $this->getShopConfig()->getConfigParam("aTinyMCE_classes", [])
+            );
 
-        return in_array($this->getShopConfig()->getActiveView()->getClassKey(), $aEnabledClasses);
+            return in_array(strtolower($this->getShopConfig()->getActiveView()->getClassKey()), $aEnabledClasses);
+        } catch (Throwable) {
+            return false;
+        }
     }
 
     /**
