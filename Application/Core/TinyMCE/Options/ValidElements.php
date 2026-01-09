@@ -36,6 +36,9 @@ class ValidElements extends AbstractOption
         return true;
     }
 
+    /**
+     * @return string[]
+     */
     protected function getElementsList(): array
     {
         return [

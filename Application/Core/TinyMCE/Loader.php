@@ -16,15 +16,17 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core\TinyMCE;
 
 use O3\TinyMCE\Application\Model\Constants;
+use OxidEsales\Eshop\Application\Model\Content;
 use OxidEsales\Eshop\Core\Config;
 use OxidEsales\Eshop\Core\Exception\FileException;
 use OxidEsales\Eshop\Core\Language;
+use OxidEsales\Eshop\Core\Model\BaseModel;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
-use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRenderer;
 use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRendererBridgeInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Throwable;
@@ -87,7 +89,7 @@ class Loader
      */
     protected function contentIsPlain(): bool
     {
-        /** @var BaseModel|Content $oEditObject */
+        /** @var null|BaseModel|Content $oEditObject */
         $oEditObject = $this->getShopConfig()->getActiveView()->getViewDataElement("edit");
 
         return is_object($oEditObject) &&
@@ -157,11 +159,10 @@ class Loader
     }
 
     /**
-     * @return TemplateRenderer
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    protected function getTemplateRenderer(): TemplateRenderer
+    protected function getTemplateRenderer(): TemplateRendererInterface
     {
         return ContainerFactory::getInstance()->getContainer()
             ->get(TemplateRendererBridgeInterface::class)
