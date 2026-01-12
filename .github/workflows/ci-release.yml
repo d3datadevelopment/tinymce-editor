@@ -58,6 +58,7 @@ jobs:
           phpunit_version: "^9 || ^10"     # v11 kills Github Action
           sourceguardian: "FALSE"
           composer_package_name: "d3/tinymce-editor"
+          oxid_module_id: "o3-tinymce-editor"
           syntax_check_paths: "."
 
   report-status:
