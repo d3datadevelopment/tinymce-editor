@@ -33,6 +33,6 @@ class FullPage extends AbstractPlugin
 
     public function requireRegistration(): bool
     {
-        return strtolower(Registry::getConfig()->getActiveView()->getClassKey()) === 'newsletter_main';
+        return strtolower((string) Registry::getConfig()->getActiveView()->getClassKey()) === 'newsletter_main';
     }
 }
