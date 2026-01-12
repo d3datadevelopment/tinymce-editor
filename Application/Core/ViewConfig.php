@@ -16,7 +16,11 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core;
 
 use O3\TinyMCE\Application\Core\TinyMCE\Loader;
+use O3\TinyMCE\Application\Core\TinyMCE\LoaderInterface;
 use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class ViewConfig extends ViewConfig_parent
 {
@@ -25,11 +29,7 @@ class ViewConfig extends ViewConfig_parent
      */
     public function getTinyMceInitCode(): string
     {
-        $config = Registry::getConfig();
-        $language = Registry::getLang();
-
-        $loader = oxNew(Loader::class, $config, $language);
-        return $loader->getEditorCode();
+        return $this->getTinyMceLoader()->getEditorCode();
     }
 
     /**
@@ -37,11 +37,7 @@ class ViewConfig extends ViewConfig_parent
      */
     public function getTinyMceScripts(): array
     {
-        $config = Registry::getConfig();
-        $language = Registry::getLang();
-
-        $loader = oxNew(Loader::class, $config, $language);
-        return $loader->getScripts();
+        return $this->getTinyMceLoader()->getScripts();
     }
 
     /**
@@ -49,10 +45,15 @@ class ViewConfig extends ViewConfig_parent
      */
     public function getTinyMceIncludes(): array
     {
-        $config = Registry::getConfig();
-        $language = Registry::getLang();
+        return $this->getTinyMceLoader()->getIncludes();
+    }
 
-        $loader = oxNew(Loader::class, $config, $language);
-        return $loader->getIncludes();
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    protected function getTinyMceLoader(): Loader
+    {
+        return ContainerFactory::getInstance()->getContainer()->get(LoaderInterface::class);
     }
 }

@@ -1,0 +1,18 @@
+services:
+  _defaults:
+    autowire: true
+
+  d3.tinymce.oxid.config:
+    class: OxidEsales\Eshop\Core\Config
+    factory: ['OxidEsales\Eshop\Core\Registry', 'getConfig']
+
+  d3.tinymce.oxid.language:
+    class: OxidEsales\Eshop\Core\Language
+    factory: ['OxidEsales\Eshop\Core\Registry', 'getLang']
+
+  O3\TinyMCE\Application\Core\TinyMCE\LoaderInterface:
+    class: O3\TinyMCE\Application\Core\TinyMCE\Loader
+    public: true
+    arguments:
+      $config: '@d3.tinymce.oxid.config'
+      $language: '@d3.tinymce.oxid.language'

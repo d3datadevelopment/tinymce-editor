@@ -31,7 +31,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Throwable;
 
-class Loader
+class Loader implements LoaderInterface
 {
     protected Configuration $configuration;
 
