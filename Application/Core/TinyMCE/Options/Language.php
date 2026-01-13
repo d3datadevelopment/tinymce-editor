@@ -15,11 +15,16 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use OxidEsales\Eshop\Core\Language as OxidLanguage;
 use OxidEsales\EshopCommunity\Core\Exception\LanguageNotFoundException;
 
 class Language extends AbstractOption
 {
     protected string $key = 'language';
+
+    public function __construct(protected OxidLanguage $language)
+    {
+    }
 
     /**
      * @return string
@@ -27,8 +32,6 @@ class Language extends AbstractOption
     public function get(): string
     {
         // https://www.tiny.cloud/docs/configure/localization/#language
-
-        $oLang = $this->loader->getLanguage();
 
         try {
             $aLang = [
@@ -42,7 +45,7 @@ class Language extends AbstractOption
                 "ru" => "ru",
             ];
 
-            return $aLang[ $oLang->getLanguageAbbr((int) $oLang->getTplLanguage()) ] ?? "en";
+            return $aLang[ $this->language->getLanguageAbbr((int) $this->language->getTplLanguage()) ] ?? "en";
         } catch (LanguageNotFoundException) {
             return "en";
         }

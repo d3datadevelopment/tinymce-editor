@@ -33,12 +33,11 @@ use Throwable;
 
 class Loader implements LoaderInterface
 {
-    protected Configuration $configuration;
-
-    public function __construct(protected Config $config, protected Language $language)
-    {
-        $this->configuration = oxNew(Configuration::class, $this);
-        $this->configuration->build();
+    public function __construct(
+        protected Configuration $configuration,
+        protected Config $config,
+        protected Language $language
+    ) {
     }
 
     /**
@@ -77,7 +76,6 @@ class Loader implements LoaderInterface
                 'strtolower',
                 $service->getCollection("aTinyMCE_classes", Constants::OXID_MODULE_ID)
             );
-
             return in_array(strtolower($this->getShopConfig()->getActiveView()->getClassKey()), $aEnabledClasses);
         } catch (Throwable) {
             return false;
@@ -149,11 +147,11 @@ class Loader implements LoaderInterface
         try {
             return [
                 Registry::getConfig()->getActiveView()->getViewConfig()->getModuleUrl(
-                    'tinymce/tinymce',
+                    'tinymce',
                     'tinymce.min.js'
                 ),
             ];
-        } catch (FileException) {
+        } catch (FileException $e) {
             return [];
         }
     }

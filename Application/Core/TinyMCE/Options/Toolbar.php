@@ -26,11 +26,6 @@ class Toolbar extends AbstractOption
 
     protected bool $forceSingleLineToolbar = true;
 
-    public function __construct(protected Loader $loader)
-    {
-        parent::__construct($loader);
-    }
-
     public function get(): string
     {
         $toolbarList = oxNew(ToolbarList::class);

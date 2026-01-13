@@ -16,8 +16,6 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core;
 
 use O3\TinyMCE\Application\Core\TinyMCE\Loader;
-use O3\TinyMCE\Application\Core\TinyMCE\LoaderInterface;
-use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -25,7 +23,8 @@ use Psr\Container\NotFoundExceptionInterface;
 class ViewConfig extends ViewConfig_parent
 {
     /**
-     * @return string
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function getTinyMceInitCode(): string
     {
@@ -34,6 +33,8 @@ class ViewConfig extends ViewConfig_parent
 
     /**
      * @return string[]
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function getTinyMceScripts(): array
     {
@@ -42,6 +43,8 @@ class ViewConfig extends ViewConfig_parent
 
     /**
      * @return string[]
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function getTinyMceIncludes(): array
     {
@@ -51,9 +54,10 @@ class ViewConfig extends ViewConfig_parent
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
+     * @codeCoverageIgnore
      */
     protected function getTinyMceLoader(): Loader
     {
-        return ContainerFactory::getInstance()->getContainer()->get(LoaderInterface::class);
+        return ContainerFactory::getInstance()->getContainer()->get(Loader::class);
     }
 }

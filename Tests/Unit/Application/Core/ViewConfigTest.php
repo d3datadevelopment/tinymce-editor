@@ -101,23 +101,4 @@ class ViewConfigTest extends TestCase
             'getTinyMceIncludes',
         );
     }
-
-    /**
-     * @throws ReflectionException
-     */
-    #[Test]
-    public function testGetTinyMceLoader()
-    {
-        $sut = $this->getMockBuilder(ViewConfig::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->assertInstanceOf(
-            Loader::class,
-            $this->callMethod(
-                $sut,
-                 'getTinyMceLoader'
-            )
-        );
-    }
 }

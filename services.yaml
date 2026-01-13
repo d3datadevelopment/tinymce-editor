@@ -2,17 +2,142 @@ services:
   _defaults:
     autowire: true
 
-  d3.tinymce.oxid.config:
-    class: OxidEsales\Eshop\Core\Config
-    factory: ['OxidEsales\Eshop\Core\Registry', 'getConfig']
+  O3\TinyMCE\Application\Core\TinyMCE\Loader:
+    public: true
+    arguments:
+      $config: '@d3.tinymce.oxid.config'
+      $language: '@d3.tinymce.oxid.language'
+
+  O3\TinyMCE\Application\Core\TinyMCE\Configuration:
+    arguments:
+      $options: !tagged_iterator d3tinymce.option
 
   d3.tinymce.oxid.language:
     class: OxidEsales\Eshop\Core\Language
     factory: ['OxidEsales\Eshop\Core\Registry', 'getLang']
 
-  O3\TinyMCE\Application\Core\TinyMCE\LoaderInterface:
-    class: O3\TinyMCE\Application\Core\TinyMCE\Loader
-    public: true
+  d3.tinymce.oxid.config:
+    class: OxidEsales\Eshop\Core\Config
+    factory: ['OxidEsales\Eshop\Core\Registry', 'getConfig']
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Setup:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\BaseUrl:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\CacheSuffix:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Selector:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\InitInstanceCallback:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\LicenseKey:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Skin:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Promotion:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\ContextMenu:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\MinHeight:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\MaxHeight:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Menubar:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarSticky:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\ToolbarMode:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Resize:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\ContentCss:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\EntityEncoding:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Protect:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\RemoveScriptHost:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\ValidElements:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Language:
     arguments:
-      $config: '@d3.tinymce.oxid.config'
       $language: '@d3.tinymce.oxid.language'
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\LanguageUrl:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\DocumentBaseUrl:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\RelativeUrls:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\ImageAdvtab:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Plugins:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\ExternalPlugins:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\FilemanagerUrl:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\QuickbarsInsertToolbar:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Options\Toolbar:
+    tags:
+      - { name: d3tinymce.option, default_priority_method: getPriority }
