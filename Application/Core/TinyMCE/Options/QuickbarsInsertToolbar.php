@@ -15,13 +15,16 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-use O3\TinyMCE\Application\Core\TinyMCE\PluginList;
 use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
 use O3\TinyMCE\Application\Core\TinyMCE\Plugins\Quickbars;
 
 class QuickbarsInsertToolbar extends AbstractOption
 {
     protected string $key = 'quickbars_insert_toolbar';
+
+    public function __construct(protected iterable $plugins)
+    {
+    }
 
     public function get(): string
     {
@@ -46,15 +49,13 @@ class QuickbarsInsertToolbar extends AbstractOption
 
     public function requireRegistration(): bool
     {
-        $pluginList = oxNew(PluginList::class);
-
         return in_array(
             true,
             array_map(
                 function (PluginInterface $plugin) {
                     return $plugin instanceof Quickbars;
                 },
-                $pluginList->get(),
+                (array) $this->plugins->getIterator(),
             )
         );
     }

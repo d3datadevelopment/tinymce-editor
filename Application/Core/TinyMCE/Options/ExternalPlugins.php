@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-use O3\TinyMCE\Application\Core\TinyMCE\PluginList;
 use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
 use O3\TinyMCE\Application\Core\TinyMCE\Utils;
 
@@ -23,10 +22,12 @@ class ExternalPlugins extends AbstractOption
 {
     protected string $key = 'external_plugins';
 
+    public function __construct(protected iterable $plugins)
+    {
+    }
+
     public function get(): string
     {
-        $pluginList = oxNew(PluginList::class);
-
         $list = implode(
             ', ',
             array_filter(
@@ -40,7 +41,7 @@ class ExternalPlugins extends AbstractOption
                             ]
                         ) : null;
                     },
-                    $pluginList->get()
+                    (array) $this->plugins->getIterator()
                 )
             )
         );

@@ -123,10 +123,14 @@ services:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\Plugins:
+    arguments:
+      $plugins: !tagged_iterator d3tinymce.plugin
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\ExternalPlugins:
+    arguments:
+      $plugins: !tagged_iterator d3tinymce.plugin
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
@@ -135,9 +139,97 @@ services:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\QuickbarsInsertToolbar:
+    arguments:
+      $plugins: !tagged_iterator d3tinymce.plugin
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\Toolbar:
+    arguments:
+      $plugins: !tagged_iterator d3tinymce.plugin
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Anchor:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Autolink:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\AutoResize:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Charmap:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Code:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\FullPage:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Image:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Legacyoutput:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Link:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Lists:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Media:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Nonbreaking:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Pagebreak:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Preview:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Quickbars:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\SearchReplace:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Table:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Visualblocks:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\WordCount:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\FullScreen:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }
+
+  O3\TinyMCE\Application\Core\TinyMCE\Plugins\Roxy:
+    tags:
+      - { name: d3tinymce.plugin, default_priority_method: getPriority }

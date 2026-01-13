@@ -15,17 +15,21 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-use O3\TinyMCE\Application\Core\TinyMCE\PluginList;
 use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
 
 class Plugins extends AbstractOption
 {
     protected string $key = 'plugins';
 
+    /**
+     * @param PluginInterface[] $plugins
+     */
+    public function __construct(protected iterable $plugins)
+    {
+    }
+
     public function get(): string
     {
-        $pluginList = oxNew(PluginList::class);
-
         return implode(' ', array_filter(
             array_map(
                 function (PluginInterface $plugin) {
@@ -34,7 +38,7 @@ class Plugins extends AbstractOption
                         null
                     ;
                 },
-                $pluginList->get()
+                (array) $this->plugins->getIterator()
             )
         ));
     }

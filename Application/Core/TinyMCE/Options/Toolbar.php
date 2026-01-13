@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-use O3\TinyMCE\Application\Core\TinyMCE\Loader;
-use O3\TinyMCE\Application\Core\TinyMCE\PluginList;
 use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
 use O3\TinyMCE\Application\Core\TinyMCE\ToolbarList;
 
@@ -25,6 +23,10 @@ class Toolbar extends AbstractOption
     protected string $key = 'toolbar';
 
     protected bool $forceSingleLineToolbar = true;
+
+    public function __construct(protected iterable $plugins)
+    {
+    }
 
     public function get(): string
     {
@@ -62,7 +64,6 @@ class Toolbar extends AbstractOption
             )
         );
 
-        $pluginList = oxNew(PluginList::class);
         $pluginToolbarElements = implode(
             ' | ',
             array_filter(
@@ -73,7 +74,7 @@ class Toolbar extends AbstractOption
                             $plugin->getToolbarElements()
                         ) : null;
                     },
-                    $pluginList->get()
+                    (array) $this->plugins->getIterator()
                 )
             )
         );
@@ -106,7 +107,6 @@ class Toolbar extends AbstractOption
             );
         }
 
-        $pluginList = oxNew(PluginList::class);
         $list[] = implode(
             ' | ',
             array_filter(
@@ -117,7 +117,7 @@ class Toolbar extends AbstractOption
                             $plugin->getToolbarElements()
                         ) : null;
                     },
-                    $pluginList->get()
+                    (array) $this->plugins->getIterator()
                 )
             )
         );
