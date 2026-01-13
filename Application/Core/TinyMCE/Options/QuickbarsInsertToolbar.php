@@ -49,14 +49,14 @@ class QuickbarsInsertToolbar extends AbstractOption
 
     public function requireRegistration(): bool
     {
-        return in_array(
-            true,
-            array_map(
-                function (PluginInterface $plugin) {
-                    return $plugin instanceof Quickbars;
-                },
-                (array) $this->plugins->getIterator(),
-            )
-        );
+        return (function () {
+            foreach ($this->plugins as $plugin) {
+                if ($plugin instanceof Quickbars) {
+                    return true;
+                }
+            }
+
+            return false;
+        })();
     }
 }

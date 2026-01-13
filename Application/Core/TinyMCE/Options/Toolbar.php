@@ -15,67 +15,51 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
-use O3\TinyMCE\Application\Core\TinyMCE\ToolbarList;
-
 class Toolbar extends AbstractOption
 {
     protected string $key = 'toolbar';
 
     protected bool $forceSingleLineToolbar = true;
 
-    public function __construct(protected iterable $plugins)
+    public function __construct(protected iterable $toolbars, protected iterable $plugins)
     {
     }
 
     public function get(): string
     {
-        $toolbarList = oxNew(ToolbarList::class);
-
         return $this->forceSingleLineToolbar ?
-            $this->getSingleLineToolbar($toolbarList) :
-            $this->getMultiLineToolbar($toolbarList);
+            $this->getSingleLineToolbar() :
+            $this->getMultiLineToolbar();
     }
 
-    /**
-     * @param ToolbarList $toolbarList
-     * @return string
-     */
-    protected function getSingleLineToolbar(ToolbarList $toolbarList): string
+    protected function getSingleLineToolbar(): string
     {
-        $all = [];
-
-        foreach ($toolbarList->get() as $toolbar) {
-            $all = array_merge($all, $toolbar);
-        }
-
         $toolbarElements = implode(
             ' | ',
-            array_filter(
-                array_map(
-                    function ($toolbarElement) {
-                        return implode(
-                            ' ',
-                            $toolbarElement->getButtons()
-                        );
-                    },
-                    $all
-                )
+            iterator_to_array(
+                (function () {
+                    foreach ($this->toolbars as $toolbar) {
+                        $buttons = $toolbar->getButtons();
+                        if ($buttons) {
+                            yield implode(' ', $buttons);
+                        }
+                    }
+                })()
             )
         );
 
         $pluginToolbarElements = implode(
             ' | ',
-            array_filter(
-                array_map(
-                    function (PluginInterface $plugin) {
-                        return count($plugin->getToolbarElements()) ? implode(
-                            ' ',
-                            $plugin->getToolbarElements()
-                        ) : null;
-                    },
-                    (array) $this->plugins->getIterator()
-                )
+            iterator_to_array(
+                (function () {
+                    foreach ($this->plugins as $plugin) {
+                        $elements = $plugin->getToolbarElements();
+
+                        if ($elements) {
+                            yield implode(' ', $elements);
+                        }
+                    }
+                })()
             )
         );
 
@@ -83,14 +67,13 @@ class Toolbar extends AbstractOption
     }
 
     /**
-     * @param ToolbarList $toolbarList
      * @return string
      */
-    protected function getMultiLineToolbar(ToolbarList $toolbarList): string
+    protected function getMultiLineToolbar(): string
     {
         $list = [];
 
-        foreach ($toolbarList->get() as $toolbar) {
+        foreach ($this->toolbars as $toolbar) {
             $list[] = implode(
                 ' | ',
                 array_filter(
@@ -109,16 +92,16 @@ class Toolbar extends AbstractOption
 
         $list[] = implode(
             ' | ',
-            array_filter(
-                array_map(
-                    function (PluginInterface $plugin) {
-                        return count($plugin->getToolbarElements()) ? implode(
-                            ' ',
-                            $plugin->getToolbarElements()
-                        ) : null;
-                    },
-                    (array) $this->plugins->getIterator()
-                )
+            iterator_to_array(
+                (function () {
+                    foreach ($this->plugins as $plugin) {
+                        $elements = $plugin->getToolbarElements();
+
+                        if ($elements) {
+                            yield implode(' ', $elements);
+                        }
+                    }
+                })()
             )
         );
 

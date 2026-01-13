@@ -30,17 +30,17 @@ class Plugins extends AbstractOption
 
     public function get(): string
     {
-        return implode(' ', array_filter(
-            array_map(
-                function (PluginInterface $plugin) {
-                    return $plugin->requireRegistration() ?
-                        $plugin->getPluginName() :
-                        null
-                    ;
-                },
-                (array) $this->plugins->getIterator()
-            )
-        ));
+        $pluginList = $this->plugins;
+
+        $names = (function () use ($pluginList) {
+            foreach ($pluginList as $plugin) {
+                if ($plugin->requireRegistration()) {
+                    yield $plugin->getPluginName();
+                }
+            }
+        })();
+
+        return implode(' ', iterator_to_array($names));
     }
 
     public function isQuoted(): bool

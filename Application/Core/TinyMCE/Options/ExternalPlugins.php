@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
-use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
+use Generator;
 use O3\TinyMCE\Application\Core\TinyMCE\Utils;
 
 class ExternalPlugins extends AbstractOption
@@ -30,22 +30,27 @@ class ExternalPlugins extends AbstractOption
     {
         $list = implode(
             ', ',
-            array_filter(
-                array_map(
-                    function (PluginInterface $plugin) {
-                        return $plugin->getScriptPath() ? implode(
-                            ':',
-                            [
-                                (oxNew(Utils::class))->quote($plugin->getPluginName()),
-                                (oxNew(Utils::class))->quote($plugin->getScriptPath()),
-                            ]
-                        ) : null;
-                    },
-                    (array) $this->plugins->getIterator()
-                )
+            iterator_to_array(
+                $this->scriptEntries($this->plugins)
             )
         );
 
-        return '{ '.$list.' }';
+        return '{ ' . $list . ' }';
+    }
+
+    private function scriptEntries(iterable $plugins): Generator
+    {
+        $utils = oxNew(Utils::class);
+
+        foreach ($plugins as $plugin) {
+            if (!$plugin->getScriptPath()) {
+                continue;
+            }
+
+            yield implode(':', [
+                $utils->quote($plugin->getPluginName()),
+                $utils->quote($plugin->getScriptPath()),
+            ]);
+        }
     }
 }
