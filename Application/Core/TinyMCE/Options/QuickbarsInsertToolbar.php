@@ -17,13 +17,19 @@ namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
 use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
 use O3\TinyMCE\Application\Core\TinyMCE\Plugins\Quickbars;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
 class QuickbarsInsertToolbar extends AbstractOption
 {
     protected string $key = 'quickbars_insert_toolbar';
 
-    public function __construct(protected iterable $plugins)
-    {
+    /**
+     * @param iterable<PluginInterface> $plugins
+     */
+    public function __construct(
+        #[TaggedIterator('d3tinymce.plugin')]
+        protected iterable $plugins
+    ) {
     }
 
     public function get(): string

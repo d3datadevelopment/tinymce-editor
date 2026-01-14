@@ -17,13 +17,20 @@ namespace O3\TinyMCE\Application\Core\TinyMCE;
 
 use O3\TinyMCE\Application\Core\TinyMCE\Options\OptionInterface;
 use OxidEsales\Eshop\Core\Registry;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
 class Configuration
 {
     /** @var array<String, String> */
     protected array $optionList = [];
 
-    public function __construct(protected iterable $options)
+    /**
+     * @param iterable<OptionInterface> $options
+     */
+    public function __construct(
+        #[TaggedIterator('d3tinymce.option')]
+        protected iterable $options
+    )
     {
         foreach ($options as $option) {
             $this->addOption($option);

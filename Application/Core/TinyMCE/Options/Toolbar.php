@@ -15,14 +15,26 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
+use O3\TinyMCE\Application\Core\TinyMCE\Toolbar\ToolbarInterface;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+
 class Toolbar extends AbstractOption
 {
     protected string $key = 'toolbar';
 
     protected bool $forceSingleLineToolbar = true;
 
-    public function __construct(protected iterable $toolbars, protected iterable $plugins)
-    {
+    /**
+     * @param iterable<ToolbarInterface> $toolbars
+     * @param iterable<PluginInterface> $plugins
+     */
+    public function __construct(
+        #[TaggedIterator('d3tinymce.toolbar')]
+        protected iterable $toolbars,
+        #[TaggedIterator('d3tinymce.plugin')]
+        protected iterable $plugins
+    ) {
     }
 
     public function get(): string

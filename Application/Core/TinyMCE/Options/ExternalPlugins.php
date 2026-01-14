@@ -16,14 +16,21 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
 use Generator;
+use O3\TinyMCE\Application\Core\TinyMCE\Plugins\PluginInterface;
 use O3\TinyMCE\Application\Core\TinyMCE\Utils;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
 class ExternalPlugins extends AbstractOption
 {
     protected string $key = 'external_plugins';
 
-    public function __construct(protected iterable $plugins)
-    {
+    /**
+     * @param iterable<PluginInterface> $plugins
+     */
+    public function __construct(
+        #[TaggedIterator('d3tinymce.plugin')]
+        protected iterable $plugins
+    ) {
     }
 
     public function get(): string
@@ -38,6 +45,9 @@ class ExternalPlugins extends AbstractOption
         return '{ ' . $list . ' }';
     }
 
+    /**
+     * @param iterable<PluginInterface> $plugins
+     */
     private function scriptEntries(iterable $plugins): Generator
     {
         $utils = oxNew(Utils::class);
