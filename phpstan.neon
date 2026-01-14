@@ -7,7 +7,7 @@ parameters:
   paths:
     - Application
     - assets/out/fileman
-  level: 6
+  level: 7
   phpVersion: 80000
   ignoreErrors:
     - '#Constant FILES_ROOT not found.#'

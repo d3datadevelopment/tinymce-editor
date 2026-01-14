@@ -496,7 +496,7 @@ class RoxyImage
     ): void {
         $tmp = (array) getimagesize($source);
         $w = $tmp[0];
-        $h = $tmp[1];
+        $h = $tmp[1] ?? 1;
         $r = $w / $h;
 
         if ($w <= ($width + 1) && (($h <= ($height + 1)) || (!$height && !$width))) {
@@ -514,12 +514,12 @@ class RoxyImage
         }
 
         try {
-            $thumbImg = imagecreatetruecolor((int) $newWidth, (int) $newHeight);
+            $thumbImg = imagecreatetruecolor(max(1, (int) $newWidth), max(1, (int) $newHeight));
             $img      = self::GetImage($source);
 
             $thumbImg = self::SetAlpha($thumbImg, $source);
 
-            imagecopyresampled($thumbImg, $img, 0, 0, 0, 0, (int) $newWidth, (int) $newHeight, $w, $h);
+            imagecopyresampled($thumbImg, $img, 0, 0, 0, 0, (int) $newWidth, (int) $newHeight, (int) $w, $h);
 
             self::OutputImage($thumbImg, RoxyFile::GetExtension(basename($source)), $destination, $quality);
         } catch (RuntimeException $e) {
@@ -529,8 +529,8 @@ class RoxyImage
     /**
      * @param string      $source
      * @param string|null $destination
-     * @param int<1, max> $width
-     * @param int<1, max> $height
+     * @param int<min, -1>|int<1, max> $width
+     * @param int<min, -1>|int<1, max> $height
      * @param int         $quality
      *
      * @return void
@@ -544,7 +544,7 @@ class RoxyImage
     ): void {
         $tmp = (array) getimagesize($source);
         $w = $tmp[0];
-        $h = $tmp[1];
+        $h = $tmp[1] ?? 1;
 
         try {
             if (($w <= $width) &&
@@ -573,7 +573,7 @@ class RoxyImage
                 $top = floor(($h - $cropHeight) / 2);
             }
 
-            self::Crop($source, $destination, (int) $left, (int) $top, $cropWidth, $cropHeight, $width, $height, $quality);
+            self::Crop($source, $destination, (int) $left, (int) $top, (int) $cropWidth, (int) $cropHeight, $width, $height, $quality);
         } catch (RuntimeException $e) {
         }
     }
@@ -585,8 +585,8 @@ class RoxyImage
      * @param int         $y
      * @param int         $cropWidth
      * @param int         $cropHeight
-     * @param int<1, max> $width
-     * @param int<1, max> $height
+     * @param int<min, -1>|int<1, max> $width
+     * @param int<min, -1>|int<1, max> $height
      * @param int         $quality
      *
      * @return void
@@ -602,7 +602,7 @@ class RoxyImage
         int $height,
         int $quality = 90
     ): void {
-        $thumbImg = imagecreatetruecolor($width, $height);
+        $thumbImg = imagecreatetruecolor(max(1, $width), max(1, $height));
         $img = self::GetImage($source);
 
         $thumbImg = self::SetAlpha($thumbImg, $source);
