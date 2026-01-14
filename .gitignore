@@ -1,2 +1,4 @@
 node_modules/
 .php_cs.cache
+.phpunit.cache
+.phpunit.result.cache

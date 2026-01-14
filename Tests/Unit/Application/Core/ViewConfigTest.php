@@ -13,11 +13,12 @@
 
 declare(strict_types=1);
 
-namespace O3\TinyMCE\Tests\Unit;
+namespace O3\TinyMCE\Tests\Unit\Application\Core;
 
 use D3\TestingTools\Development\CanAccessRestricted;
 use O3\TinyMCE\Application\Core\TinyMCE\Loader;
 use O3\TinyMCE\Application\Core\ViewConfig;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
