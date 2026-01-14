@@ -15,15 +15,20 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use OxidEsales\Eshop\Core\Config;
 use OxidEsales\Eshop\Core\Registry;
 
 class DocumentBaseUrl extends AbstractOption
 {
     protected string $key = 'document_base_url';
 
+    public function __construct(protected Config $config)
+    {
+    }
+
     public function get(): string
     {
-        return Registry::getConfig()->getActiveView()->getViewConfig()->getBaseDir();
+        return $this->config->getActiveView()->getViewConfig()->getBaseDir();
     }
 
     public function isQuoted(): bool

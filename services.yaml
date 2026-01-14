@@ -25,6 +25,8 @@ services:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\BaseUrl:
+    arguments:
+      $config: '@d3.tinymce.oxid.config'
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
@@ -81,6 +83,8 @@ services:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\ContentCss:
+    arguments:
+      $config: '@d3.tinymce.oxid.config'
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
@@ -107,10 +111,14 @@ services:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\LanguageUrl:
+    arguments:
+      $config: '@d3.tinymce.oxid.config'
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 
   O3\TinyMCE\Application\Core\TinyMCE\Options\DocumentBaseUrl:
+    arguments:
+      $config: '@d3.tinymce.oxid.config'
     tags:
       - { name: d3tinymce.option, default_priority_method: getPriority }
 

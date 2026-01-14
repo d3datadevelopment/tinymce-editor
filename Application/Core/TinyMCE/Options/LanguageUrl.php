@@ -16,20 +16,26 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
 use O3\TinyMCE\Application\Model\Constants;
-use OxidEsales\Eshop\Core\Registry;
+use oxfileexception;
+use OxidEsales\Eshop\Core\Config;
 
-class LanguageUrl extends Language
+class LanguageUrl extends AbstractOption
 {
     protected string $key = 'language_url';
 
+    public function __construct(protected Config $config, protected Language $languageOption)
+    {
+    }
+
     /**
      * @return string
+     * @throws oxFileException
      */
     public function get(): string
     {
-        $abbr = parent::get();
+        $abbr = $this->languageOption->get();
 
-        return Registry::getConfig()->getActiveView()->getViewConfig()->getModuleUrl(
+        return $this->config->getActiveView()->getViewConfig()->getModuleUrl(
             Constants::OXID_MODULE_ID.'/out/tinymce/langs',
             sprintf('%s.js', $abbr)
         );

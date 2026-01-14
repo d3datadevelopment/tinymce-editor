@@ -15,12 +15,16 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use OxidEsales\Eshop\Core\Config;
 use OxidEsales\Eshop\Core\Exception\FileException;
-use OxidEsales\Eshop\Core\Registry;
 
 class BaseUrl extends AbstractOption
 {
     protected string $key = 'base_url';
+
+    public function __construct(protected Config $config)
+    {
+    }
 
     /**
      * @return string
@@ -28,7 +32,7 @@ class BaseUrl extends AbstractOption
     public function get(): string
     {
         try {
-            return Registry::getConfig()->getActiveView()->getViewConfig()->getModuleUrl(
+            return $this->config->getActiveView()->getViewConfig()->getModuleUrl(
                 'tinymce',
                 ''
             );

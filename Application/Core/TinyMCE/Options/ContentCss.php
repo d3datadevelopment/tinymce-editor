@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
 use O3\TinyMCE\Application\Core\TinyMCE\Loader;
-use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\Eshop\Core\Config;
 
 class ContentCss extends AbstractOption
 {
@@ -26,10 +26,17 @@ class ContentCss extends AbstractOption
 
     protected bool $darkMode = false;
 
+    public function __construct(protected Config $config)
+    {
+    }
+
     public function get(): string
     {
-        /** @var string $theme */
-        $theme = Registry::getConfig()->getConfigParam('sTheme');
+        $theme = $this->config->getConfigParam('sTheme');
+
+        if (!$theme) {
+            return '';
+        }
 
         return implode(
             ',',
@@ -41,6 +48,9 @@ class ContentCss extends AbstractOption
         );
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function isQuoted(): bool
     {
         return true;
