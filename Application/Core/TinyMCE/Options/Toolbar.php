@@ -23,8 +23,6 @@ class Toolbar extends AbstractOption
 {
     protected string $key = 'toolbar';
 
-    protected bool $forceSingleLineToolbar = true;
-
     /**
      * @param iterable<ToolbarInterface> $toolbars
      * @param iterable<PluginInterface> $plugins
@@ -39,9 +37,7 @@ class Toolbar extends AbstractOption
 
     public function get(): string
     {
-        return $this->forceSingleLineToolbar ?
-            $this->getSingleLineToolbar() :
-            $this->getMultiLineToolbar();
+        return $this->getSingleLineToolbar();
     }
 
     protected function getSingleLineToolbar(): string
@@ -76,48 +72,6 @@ class Toolbar extends AbstractOption
         );
 
         return $toolbarElements . ' | ' . $pluginToolbarElements;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getMultiLineToolbar(): string
-    {
-        $list = [];
-
-        foreach ($this->toolbars as $toolbar) {
-            $list[] = implode(
-                ' | ',
-                array_filter(
-                    array_map(
-                        function ($toolbarElement) {
-                            return implode(
-                                ' ',
-                                $toolbarElement->getButtons()
-                            );
-                        },
-                        $toolbar
-                    )
-                )
-            );
-        }
-
-        $list[] = implode(
-            ' | ',
-            iterator_to_array(
-                (function () {
-                    foreach ($this->plugins as $plugin) {
-                        $elements = $plugin->getToolbarElements();
-
-                        if ($elements) {
-                            yield implode(' ', $elements);
-                        }
-                    }
-                })()
-            )
-        );
-
-        return '["'.implode('", "', $list).'"]';
     }
 
     public function isQuoted(): bool
