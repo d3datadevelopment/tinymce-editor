@@ -15,8 +15,8 @@ declare(strict_types=1);
 
 namespace O3\TinyMCE\Application\Core\TinyMCE\Options;
 
+use Exception;
 use O3\TinyMCE\Application\Model\Constants;
-use oxfileexception;
 use OxidEsales\Eshop\Core\Config;
 
 class LanguageUrl extends AbstractOption
@@ -29,16 +29,19 @@ class LanguageUrl extends AbstractOption
 
     /**
      * @return string
-     * @throws oxFileException
      */
     public function get(): string
     {
         $abbr = $this->languageOption->get();
 
-        return $this->config->getActiveView()->getViewConfig()->getModuleUrl(
-            Constants::OXID_MODULE_ID.'/out/tinymce/langs',
-            sprintf('%s.js', $abbr)
-        );
+        try {
+            return $this->config->getActiveView()->getViewConfig()->getModuleUrl(
+                Constants::OXID_MODULE_ID . '/out/tinymce/langs',
+                sprintf( '%s.js', $abbr )
+            );
+        } catch ( Exception) {
+            return '';
+        }
     }
 
     public function isQuoted(): bool
